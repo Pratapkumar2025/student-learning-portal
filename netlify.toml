@@ -1,0 +1,11 @@
+[build]
+  publish = "dist"
+  functions = "functions"
+
+[dev]
+  command = "npm run dev"
+  port = 8888
+
+[build.environment]
+  NODE_VERSION = "16.x"
+  NPM_VERSION = "8.x"
