@@ -18,7 +18,7 @@ Visit: https://pratapkumar.netlify.app/
 ## 👨‍💻 Developer
 
 Created by Pratap Kumar
-Electrical Engineer at Powergrid Corporation of India Ltd.
+Electrical Engineer 
 
 ## 📞 Feedback
 
