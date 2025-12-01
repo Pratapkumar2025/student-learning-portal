@@ -740,7 +740,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .stat-card {
     background: white;
-    padding: var(--spacing-md);
+    padding: 1rem;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
     transition: transform 0.3s;
@@ -751,14 +751,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .stat-number {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 700;
     color: var(--primary-color);
     display: block;
 }
 
 .stat-label {
-    font-size: 0.9rem;
+    font-size: 0.8125rem;
     color: var(--text-light);
 }
 
@@ -1532,7 +1532,7 @@ h1, h2, h3, h4, h5, h6 {
     background: linear-gradient(135deg, rgba(229, 90, 43, 0.85) 0%, rgba(62, 39, 35, 0.85) 100%);
     backdrop-filter: blur(10px);
     color: white;
-    padding: 1.5rem 0 0.75rem;
+    padding: 1rem 0 0.5rem;
     margin-top: var(--spacing-lg);
     position: sticky;
     bottom: 0;
@@ -1542,29 +1542,31 @@ h1, h2, h3, h4, h5, h6 {
 .footer-content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-lg);
+    gap: 12px;
+    margin-bottom: 12px;
 }
 
 .footer-section {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xs);
+    gap: 12px;
 }
 
 .footer-title {
-    font-size: 1.2rem;
-    margin-bottom: var(--spacing-sm);
+    font-size: 1rem;
+    margin-bottom: 8px;
 }
 
 .footer-text {
     opacity: 0.9;
-    line-height: 1.6;
+    line-height: 1.5;
+    font-size: 0.8125rem;
 }
 
 .footer-slogan {
     font-style: italic;
     opacity: 0.8;
+    font-size: 0.8125rem;
 }
 
 .footer-links {
@@ -1572,7 +1574,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer-links li {
-    margin-bottom: var(--spacing-xs);
+    margin-bottom: 8px;
+    font-size: 0.8125rem;
 }
 
 .footer-links a {
@@ -1589,21 +1592,24 @@ h1, h2, h3, h4, h5, h6 {
 
 .footer-contact {
     opacity: 0.9;
+    font-size: 0.8125rem;
 }
 
 .footer-bottom {
     text-align: center;
-    padding-top: var(--spacing-md);
+    padding-top: 10px;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .footer-bottom p {
     opacity: 0.8;
-    margin-bottom: var(--spacing-xs);
+    margin-bottom: 6px;
+    font-size: 0.8125rem;
 }
 
 .footer-credit {
     font-style: italic;
+    font-size: 0.8125rem;
 }
 
 /* ===== Responsive Design ===== */
@@ -1635,7 +1641,43 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .main-footer {
-        padding: 1rem 0 0.5rem;
+        padding: 0.75rem 0 0.375rem;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .footer-section {
+        gap: 10px;
+    }
+
+    .footer-title {
+        font-size: 1rem;
+        margin-bottom: 6px;
+    }
+
+    .footer-text,
+    .footer-slogan,
+    .footer-links li,
+    .footer-contact,
+    .footer-bottom p,
+    .footer-credit {
+        font-size: 0.75rem;
+    }
+
+    .footer-links li {
+        margin-bottom: 6px;
+    }
+
+    .footer-bottom {
+        padding-top: 8px;
+    }
+
+    .footer-bottom p {
+        margin-bottom: 4px;
     }
 
     .hero-title {
