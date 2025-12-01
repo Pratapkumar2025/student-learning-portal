@@ -1,61 +1,477 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Learning Portal</title>
+    <meta name="description" content="बिहार के छात्रों के लिए विज्ञान क्विज़ और अध्ययन सामग्री - कक्षा 5 से 10 तक NCERT">
+    <title>हमार पढ़ाई - बिहार के होनहार छात्र का अड्डा</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;600;700&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#radio">Radio</a></li>
-                <li><a href="#quiz">Quiz</a></li>
-                <li><a href="#subjects">Subjects</a></li>
-                <li><a href="#history">History</a></li>
-                <li><a href="#exams">Exams</a></li>
-                <li><a href="#jobs">Jobs</a></li>
-            </ul>
-        </nav>
+    <!-- Live News Ticker -->
+    <div class="news-ticker-container">
+        <div class="ticker-label">📰 ताज़ा समाचार:</div>
+        <div class="news-ticker">
+            <div class="ticker-content" id="tickerContent">
+                समाचार लोड हो रहा है...
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo-section">
+                <div class="diya-icon">🪔</div>
+                <div class="brand-text">
+                    <h1 class="site-title">हमार पढ़ाई</h1>
+                    <p class="tagline">पढ़ेगा बिहार, बनेगा लालटॉप! 🌟</p>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link active">होम</a></li>
+                    <li><a href="#quiz" class="nav-link">क्विज़</a></li>
+                    <li><a href="#study" class="nav-link">पढ़ाई</a></li>
+                    <li><a href="#leaderboard" class="nav-link">लीडरबोर्ड</a></li>
+                    <li><a href="#progress" class="nav-link">प्रगति</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <section id="home">
-            <h1>Welcome to the Student Learning Portal</h1>
-        </section>
-        <section id="radio">
-            <h2>Radio Section</h2>
-        </section>
-        <section id="quiz">
-            <h2>Quiz Section</h2>
-        </section>
-        <section id="subjects">
-            <h2>Subjects Section</h2>
-        </section>
-        <section id="history">
-            <h2>History Section</h2>
-        </section>
-        <section id="exams">
-            <h2>Exams Section</h2>
-        </section>
-        <section id="jobs">
-            <h2>Jobs Section</h2>
-        </section>
-        <div class="spotify-embeds">
-            <h2>Motivational Hindi Songs</h2>
-            <iframe src="https://open.spotify.com/embed/playlist/your_playlist_id_for_motivational_hindi" 
-                    width="300" height="380" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-            
-            <h2>Social Issues Podcasts in Hindi</h2>
-            <iframe src="https://open.spotify.com/embed/playlist/your_playlist_id_for_social_issues" 
-                    width="300" height="380" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-title">स्वागत है बिहार के होनहार छात्रों का! 🙏</h2>
+                <p class="hero-subtitle">NCERT विज्ञान (कक्षा 5-10) की मुफ्त ऑनलाइन क्विज़ और अध्ययन सामग्री</p>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalQuizzes">500+</div>
+                        <div class="stat-label">प्रश्न</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalStudents">1000+</div>
+                        <div class="stat-label">छात्र</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">मुफ्त</div>
+                    </div>
+                </div>
+                <button class="cta-button" onclick="scrollToQuiz()">
+                    शुरू करें क्विज़ 🚀
+                </button>
+            </div>
+            <!-- Daily Motivational Quote -->
+            <div class="daily-quote-card" id="dailyQuote">
+                <div class="quote-icon">💡</div>
+                <p class="quote-text-main" id="quoteText">लोड हो रहा है...</p>
+                <p class="quote-text-english" id="quoteTextEnglish"></p>
+                <p class="quote-author-name" id="quoteAuthor"></p>
+                <button class="quote-refresh-btn" onclick="refreshQuote()">🔄 नया उद्धरण</button>
+            </div>
         </div>
-    </main>
+    </section>
 
-    <footer>
-        <p>&copy; 2025 Student Learning Portal. All Rights Reserved.</p>
+    <!-- Quiz Section -->
+    <section id="quiz" class="quiz-section">
+        <div class="container">
+            <h2 class="section-title">विज्ञान क्विज़ 📚</h2>
+            <p class="section-subtitle">अपने कक्षा चुनें और टेस्ट शुरू करें</p>
+
+            <!-- Class Selection -->
+            <div class="class-selection" id="classSelection">
+                <div class="class-grid">
+                    <button class="class-card" onclick="selectClass(5)">
+                        <span class="class-number">5</span>
+                        <span class="class-label">कक्षा</span>
+                    </button>
+                    <button class="class-card" onclick="selectClass(6)">
+                        <span class="class-number">6</span>
+                        <span class="class-label">कक्षा</span>
+                    </button>
+                    <button class="class-card" onclick="selectClass(7)">
+                        <span class="class-number">7</span>
+                        <span class="class-label">कक्षा</span>
+                    </button>
+                    <button class="class-card" onclick="selectClass(8)">
+                        <span class="class-number">8</span>
+                        <span class="class-label">कक्षा</span>
+                    </button>
+                    <button class="class-card" onclick="selectClass(9)">
+                        <span class="class-number">9</span>
+                        <span class="class-label">कक्षा</span>
+                    </button>
+                    <button class="class-card" onclick="selectClass(10)">
+                        <span class="class-number">10</span>
+                        <span class="class-label">कक्षा</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Subject Selection -->
+            <div class="subject-selection hidden" id="subjectSelection">
+                <button class="back-button" onclick="backToClassSelection()">← वापस जाएं</button>
+                <h3 class="selection-title">विषय चुनें</h3>
+                <div class="subject-grid">
+                    <button class="subject-card" onclick="selectSubject('physics')">
+                        <span class="subject-icon">⚛️</span>
+                        <span class="subject-name">भौतिक विज्ञान</span>
+                    </button>
+                    <button class="subject-card" onclick="selectSubject('chemistry')">
+                        <span class="subject-icon">🧪</span>
+                        <span class="subject-name">रसायन विज्ञान</span>
+                    </button>
+                    <button class="subject-card" onclick="selectSubject('biology')">
+                        <span class="subject-icon">🌱</span>
+                        <span class="subject-name">जीव विज्ञान</span>
+                    </button>
+                    <button class="subject-card" onclick="selectSubject('general')">
+                        <span class="subject-icon">🔬</span>
+                        <span class="subject-name">सामान्य विज्ञान</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Interface -->
+            <div class="quiz-interface hidden" id="quizInterface">
+                <div class="quiz-header">
+                    <button class="back-button" onclick="backToSubjectSelection()">← वापस जाएं</button>
+                    <div class="quiz-info">
+                        <span class="quiz-class">कक्षा: <strong id="selectedClass">-</strong></span>
+                        <span class="quiz-subject">विषय: <strong id="selectedSubject">-</strong></span>
+                    </div>
+                    <div class="quiz-timer">
+                        <span class="timer-icon">⏱️</span>
+                        <span class="timer-text" id="timerDisplay">00:00</span>
+                    </div>
+                </div>
+
+                <div class="quiz-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text">
+                        प्रश्न <span id="currentQuestion">1</span> of <span id="totalQuestions">10</span>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <h3 class="question-text" id="questionText">प्रश्न यहाँ दिखेगा...</h3>
+                    <div class="options-container" id="optionsContainer">
+                        <!-- Options will be inserted here by JavaScript -->
+                    </div>
+                    <div class="explanation-box hidden" id="explanationBox">
+                        <h4 class="explanation-title">व्याख्या:</h4>
+                        <p class="explanation-text" id="explanationText"></p>
+                    </div>
+                </div>
+
+                <div class="quiz-controls">
+                    <button class="quiz-button secondary" onclick="skipQuestion()" id="skipBtn">छोड़ें</button>
+                    <button class="quiz-button primary" onclick="nextQuestion()" id="nextBtn" disabled>आगे बढ़ें</button>
+                </div>
+            </div>
+
+            <!-- Quiz Results -->
+            <div class="quiz-results hidden" id="quizResults">
+                <div class="results-card">
+                    <div class="results-icon">🎉</div>
+                    <h3 class="results-title">बधाई हो!</h3>
+                    <div class="score-display">
+                        <div class="score-circle">
+                            <span class="score-value" id="scoreValue">0</span>
+                            <span class="score-total">/ <span id="totalScore">10</span></span>
+                        </div>
+                        <p class="score-percentage" id="scorePercentage">0%</p>
+                    </div>
+                    <div class="results-stats">
+                        <div class="result-stat correct">
+                            <span class="stat-icon">✓</span>
+                            <span class="stat-value" id="correctAnswers">0</span>
+                            <span class="stat-label">सही</span>
+                        </div>
+                        <div class="result-stat wrong">
+                            <span class="stat-icon">✗</span>
+                            <span class="stat-value" id="wrongAnswers">0</span>
+                            <span class="stat-label">गलत</span>
+                        </div>
+                        <div class="result-stat skipped">
+                            <span class="stat-icon">⊘</span>
+                            <span class="stat-value" id="skippedAnswers">0</span>
+                            <span class="stat-label">छोड़े गए</span>
+                        </div>
+                    </div>
+                    <div class="results-time">
+                        <span class="time-icon">⏱️</span>
+                        <span>समय: <strong id="timeTaken">00:00</strong></span>
+                    </div>
+                    <div class="results-actions">
+                        <button class="results-button primary" onclick="downloadCertificate()">
+                            📜 सर्टिफिकेट डाउनलोड करें
+                        </button>
+                        <button class="results-button secondary" onclick="retryQuiz()">
+                            🔄 फिर से कोशिश करें
+                        </button>
+                        <button class="results-button tertiary" onclick="backToClassSelection()">
+                            🏠 होम जाएं
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Study Materials Section -->
+    <section id="study" class="study-section">
+        <div class="container">
+            <h2 class="section-title">अध्ययन सामग्री 📖</h2>
+            <p class="section-subtitle">कक्षावार NCERT विज्ञान नोट्स और टॉपिक</p>
+
+            <div class="study-grid">
+                <div class="study-card">
+                    <div class="study-icon">📘</div>
+                    <h3 class="study-title">कक्षा 5-6</h3>
+                    <ul class="study-topics">
+                        <li>पौधों का अध्ययन</li>
+                        <li>जल और जीवन</li>
+                        <li>ऊर्जा के स्रोत</li>
+                        <li>प्रकाश और ध्वनि</li>
+                    </ul>
+                    <button class="study-button" onclick="openStudyMaterial('5-6')">अध्ययन करें</button>
+                </div>
+
+                <div class="study-card">
+                    <div class="study-icon">📗</div>
+                    <h3 class="study-title">कक्षा 7-8</h3>
+                    <ul class="study-topics">
+                        <li>रासायनिक प्रतिक्रियाएं</li>
+                        <li>कोशिका संरचना</li>
+                        <li>गति और बल</li>
+                        <li>विद्युत धारा</li>
+                    </ul>
+                    <button class="study-button" onclick="openStudyMaterial('7-8')">अध्ययन करें</button>
+                </div>
+
+                <div class="study-card">
+                    <div class="study-icon">📕</div>
+                    <h3 class="study-title">कक्षा 9-10</h3>
+                    <ul class="study-topics">
+                        <li>न्यूटन के नियम</li>
+                        <li>रासायनिक समीकरण</li>
+                        <li>आनुवंशिकी</li>
+                        <li>ऊर्जा संरक्षण</li>
+                    </ul>
+                    <button class="study-button" onclick="openStudyMaterial('9-10')">अध्ययन करें</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaderboard Section -->
+    <section id="leaderboard" class="leaderboard-section">
+        <div class="container">
+            <h2 class="section-title">लीडरबोर्ड 🏆</h2>
+            <p class="section-subtitle">टॉप परफॉर्मर्स</p>
+
+            <div class="leaderboard-tabs">
+                <button class="tab-button active" onclick="switchLeaderboardTab('today')">आज</button>
+                <button class="tab-button" onclick="switchLeaderboardTab('week')">इस हफ्ते</button>
+                <button class="tab-button" onclick="switchLeaderboardTab('alltime')">सभी समय</button>
+            </div>
+
+            <div class="leaderboard-list" id="leaderboardList">
+                <!-- Leaderboard entries will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Section -->
+    <section id="progress" class="progress-section">
+        <div class="container">
+            <h2 class="section-title">आपकी प्रगति 📊</h2>
+            <p class="section-subtitle">अपने सीखने की यात्रा ट्रैक करें</p>
+
+            <div class="progress-grid">
+                <div class="progress-card">
+                    <h3 class="progress-card-title">आज का स्ट्रीक 🔥</h3>
+                    <div class="streak-display">
+                        <span class="streak-number" id="streakCount">0</span>
+                        <span class="streak-label">दिन</span>
+                    </div>
+                </div>
+
+                <div class="progress-card">
+                    <h3 class="progress-card-title">कुल क्विज़ 📝</h3>
+                    <div class="quiz-count-display">
+                        <span class="quiz-count" id="totalQuizzesTaken">0</span>
+                    </div>
+                </div>
+
+                <div class="progress-card">
+                    <h3 class="progress-card-title">औसत स्कोर 📈</h3>
+                    <div class="avg-score-display">
+                        <span class="avg-score" id="averageScore">0</span>
+                        <span class="avg-label">%</span>
+                    </div>
+                </div>
+
+                <div class="progress-card">
+                    <h3 class="progress-card-title">कुल समय ⏰</h3>
+                    <div class="time-display">
+                        <span class="time-spent" id="totalTimeSpent">0</span>
+                        <span class="time-label">मिनट</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subject-progress">
+                <h3 class="progress-subtitle">विषयवार प्रगति</h3>
+                <div class="subject-progress-bars">
+                    <div class="subject-progress-item">
+                        <div class="subject-progress-header">
+                            <span>भौतिक विज्ञान ⚛️</span>
+                            <span id="physicsProgress">0%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill physics" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="subject-progress-item">
+                        <div class="subject-progress-header">
+                            <span>रसायन विज्ञान 🧪</span>
+                            <span id="chemistryProgress">0%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill chemistry" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="subject-progress-item">
+                        <div class="subject-progress-header">
+                            <span>जीव विज्ञान 🌱</span>
+                            <span id="biologyProgress">0%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill biology" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="subject-progress-item">
+                        <div class="subject-progress-header">
+                            <span>सामान्य विज्ञान 🔬</span>
+                            <span id="generalProgress">0%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill general" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 class="footer-title">हमार पढ़ाई</h4>
+                    <p class="footer-text">बिहार के छात्रों के लिए मुफ्त शिक्षा मंच</p>
+                    <p class="footer-slogan">🪔 ज्ञान की ज्योति जलाएं</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">त्वरित लिंक</h4>
+                    <ul class="footer-links">
+                        <li><a href="#quiz">क्विज़ शुरू करें</a></li>
+                        <li><a href="#study">अध्ययन सामग्री</a></li>
+                        <li><a href="#leaderboard">लीडरबोर्ड</a></li>
+                        <li><a href="#progress">प्रगति</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">संपर्क करें</h4>
+                    <p class="footer-text">सुझाव और प्रश्नों के लिए:</p>
+                    <p class="footer-contact">📧 contact@hamarpadhai.in</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 हमार पढ़ाई - बिहार के छात्रों का अड्डा | सभी अधिकार सुरक्षित</p>
+                <p class="footer-credit">Made with ❤️ in Bihar</p>
+            </div>
+        </div>
     </footer>
+
+    <!-- Feedback Modal -->
+    <div class="modal-overlay hidden" id="feedbackModal">
+        <div class="modal-content feedback-modal">
+            <button class="modal-close" onclick="closeFeedbackModal()">×</button>
+            <h3 class="modal-title">आपकी राय हमारे लिए महत्वपूर्ण है! 💬</h3>
+            <p class="modal-subtitle">कृपया अपना अनुभव साझा करें</p>
+
+            <form id="feedbackForm" onsubmit="submitFeedback(event)">
+                <div class="form-group">
+                    <label for="feedbackEmail">आपका ईमेल (वैकल्पिक)</label>
+                    <input
+                        type="email"
+                        id="feedbackEmail"
+                        class="form-input"
+                        placeholder="your@email.com"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="quizRating">क्विज़ को रेटिंग दें</label>
+                    <div class="star-rating" id="starRating">
+                        <span class="star" data-rating="1">⭐</span>
+                        <span class="star" data-rating="2">⭐</span>
+                        <span class="star" data-rating="3">⭐</span>
+                        <span class="star" data-rating="4">⭐</span>
+                        <span class="star" data-rating="5">⭐</span>
+                    </div>
+                    <input type="hidden" id="quizRating" value="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="feedbackText">आपकी प्रतिक्रिया</label>
+                    <textarea
+                        id="feedbackText"
+                        class="form-textarea"
+                        rows="4"
+                        placeholder="अपना अनुभव, सुझाव या समस्या बताएं..."
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="feedbackConsent" required>
+                        मैं अपनी प्रतिक्रिया साझा करने के लिए सहमत हूं
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-primary btn-submit">
+                    📨 प्रतिक्रिया भेजें
+                </button>
+            </form>
+
+            <div class="feedback-success hidden" id="feedbackSuccess">
+                <div class="success-icon">✅</div>
+                <h4>धन्यवाद!</h4>
+                <p>आपकी प्रतिक्रिया सफलतापूर्वक प्राप्त हो गई है।</p>
+                <p class="success-note">हम जल्द ही आपसे संपर्क करेंगे।</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
