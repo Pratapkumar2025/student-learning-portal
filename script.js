@@ -7,6 +7,7 @@
 let quizState = {
     selectedClass: null,
     selectedSubject: null,
+    questionCount: 10, // User selected count
     currentQuestionIndex: 0,
     questions: [],
     answers: [],
@@ -770,8 +771,16 @@ function backToClassSelection() {
 function selectSubject(subject) {
     quizState.selectedSubject = subject;
 
+    // Show quiz customization modal
+    document.getElementById('subjectSelection').classList.add('hidden');
+    document.getElementById('quizCustomization').classList.remove('hidden');
+}
+
+function selectQuestionCount(count) {
+    quizState.questionCount = count;
+
     // Get questions for selected class and subject
-    const questions = quizDatabase[quizState.selectedClass]?.[subject] || [];
+    const questions = quizDatabase[quizState.selectedClass]?.[quizState.selectedSubject] || [];
 
     if (questions.length === 0) {
         alert('इस कक्षा और विषय के लिए प्रश्न जल्द ही उपलब्ध होंगे!');
@@ -781,17 +790,20 @@ function selectSubject(subject) {
     // Use smart question rotation (no repeats in same session)
     quizState.questions = selectSmartQuestions(
         quizState.selectedClass,
-        subject,
+        quizState.selectedSubject,
         questions,
-        10
+        count
     );
     quizState.answers = new Array(quizState.questions.length).fill(null);
     quizState.currentQuestionIndex = 0;
 
     // Update UI
     document.getElementById('selectedClass').textContent = quizState.selectedClass;
-    document.getElementById('selectedSubject').textContent = getSubjectName(subject);
+    document.getElementById('selectedSubject').textContent = getSubjectName(quizState.selectedSubject);
     document.getElementById('totalQuestions').textContent = quizState.questions.length;
+
+    // Hide customization, start quiz
+    document.getElementById('quizCustomization').classList.add('hidden');
 
     // Start quiz
     startQuiz();
@@ -800,7 +812,22 @@ function selectSubject(subject) {
 function backToSubjectSelection() {
     stopTimer();
     document.getElementById('subjectSelection').classList.remove('hidden');
+    document.getElementById('quizCustomization').classList.add('hidden');
     document.getElementById('quizInterface').classList.add('hidden');
+}
+
+function previousQuestion() {
+    if (quizState.currentQuestionIndex > 0) {
+        quizState.currentQuestionIndex--;
+        loadQuestion();
+    }
+}
+
+function goToHome() {
+    if (confirm('क्या आप क्विज छोड़ना चाहते हैं?')) {
+        resetQuizState();
+        backToClassSelection();
+    }
 }
 
 function startQuiz() {
@@ -870,6 +897,12 @@ function loadQuestion() {
 
     // Update button states
     updateButtonStates();
+
+    // Update previous button state
+    const prevBtn = document.getElementById('prevBtn');
+    if (prevBtn) {
+        prevBtn.disabled = quizState.currentQuestionIndex === 0;
+    }
 }
 
 function selectOption(optionIndex) {

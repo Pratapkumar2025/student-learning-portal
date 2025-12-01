@@ -143,13 +143,51 @@
                 </div>
             </div>
 
+            <!-- Quiz Customization -->
+            <div class="quiz-customization hidden" id="quizCustomization">
+                <button class="back-button" onclick="backToSubjectSelection()">← वापस जाएं</button>
+                <div class="quiz-customization-card">
+                    <h3 class="customization-title">कितने सवाल करना चाहते हैं? 🤔</h3>
+                    <div class="customization-options">
+                        <div class="option-card" onclick="selectQuestionCount(10)">
+                            <div>
+                                <div class="option-label">10 प्रश्न</div>
+                                <div class="option-description">त्वरित अभ्यास के लिए</div>
+                            </div>
+                            <span>⚡</span>
+                        </div>
+                        <div class="option-card" onclick="selectQuestionCount(20)">
+                            <div>
+                                <div class="option-label">20 प्रश्न</div>
+                                <div class="option-description">मध्यम अभ्यास</div>
+                            </div>
+                            <span>📚</span>
+                        </div>
+                        <div class="option-card" onclick="selectQuestionCount(30)">
+                            <div>
+                                <div class="option-label">30 प्रश्न</div>
+                                <div class="option-description">गहन अध्ययन</div>
+                            </div>
+                            <span>🎯</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Quiz Interface -->
             <div class="quiz-interface hidden" id="quizInterface">
-                <div class="quiz-header">
-                    <button class="back-button" onclick="backToSubjectSelection()">← वापस जाएं</button>
-                    <div class="quiz-info">
-                        <span class="quiz-class">कक्षा: <strong id="selectedClass">-</strong></span>
-                        <span class="quiz-subject">विषय: <strong id="selectedSubject">-</strong></span>
+                <!-- Persistent Quiz Navigation -->
+                <div class="quiz-persistent-nav">
+                    <div class="quiz-nav-buttons">
+                        <button class="quiz-nav-btn" onclick="previousQuestion()" id="prevBtn" disabled>
+                            ← पिछला
+                        </button>
+                        <button class="quiz-nav-btn primary" onclick="goToHome()">
+                            🏠 होम
+                        </button>
+                    </div>
+                    <div class="quiz-progress-info">
+                        <span id="currentQuestion">1</span> / <span id="totalQuestions">10</span> प्रश्न
                     </div>
                     <div class="quiz-timer">
                         <span class="timer-icon">⏱️</span>
@@ -157,12 +195,16 @@
                     </div>
                 </div>
 
+                <div class="quiz-header">
+                    <div class="quiz-info">
+                        <span class="quiz-class">कक्षा: <strong id="selectedClass">-</strong></span>
+                        <span class="quiz-subject">विषय: <strong id="selectedSubject">-</strong></span>
+                    </div>
+                </div>
+
                 <div class="quiz-progress">
                     <div class="progress-bar">
                         <div class="progress-fill" id="progressFill"></div>
-                    </div>
-                    <div class="progress-text">
-                        प्रश्न <span id="currentQuestion">1</span> of <span id="totalQuestions">10</span>
                     </div>
                 </div>
 
@@ -379,6 +421,58 @@
         </div>
     </section>
 
+    <!-- Great Indians Section -->
+    <section id="great-indians" class="great-indians-section">
+        <div class="container">
+            <h2 class="section-title">भारत के महान लोग 🇮🇳</h2>
+            <p class="section-subtitle">प्रेरणा के स्रोत - हमारे महापुरुष</p>
+
+            <div class="indians-grid">
+                <div class="indian-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/B._R._Ambedkar.jpg/220px-B._R._Ambedkar.jpg" alt="डॉ. भीमराव अम्बेडकर" class="indian-photo">
+                    <div class="indian-name">डॉ. भीमराव अम्बेडकर</div>
+                    <div class="indian-name-english">Dr. B.R. Ambedkar</div>
+                    <p class="indian-intro">भारतीय संविधान के निर्माता और समाज सुधारक। शिक्षा और समानता के प्रबल पक्षधर।</p>
+                </div>
+
+                <div class="indian-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Jyotirao_Phule.jpg/220px-Jyotirao_Phule.jpg" alt="ज्योतिबा फुले" class="indian-photo">
+                    <div class="indian-name">ज्योतिबा फुले</div>
+                    <div class="indian-name-english">Jyotirao Phule</div>
+                    <p class="indian-intro">महिलाओं और वंचितों की शिक्षा के अग्रदूत। सामाजिक सुधार आंदोलन के प्रणेता।</p>
+                </div>
+
+                <div class="indian-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Mahatma-Gandhi%2C_studio%2C_1931.jpg/220px-Mahatma-Gandhi%2C_studio%2C_1931.jpg" alt="महात्मा गांधी" class="indian-photo">
+                    <div class="indian-name">महात्मा गांधी</div>
+                    <div class="indian-name-english">Mahatma Gandhi</div>
+                    <p class="indian-intro">अहिंसा और सत्याग्रह के प्रणेता। भारत की आजादी के महानायक।</p>
+                </div>
+
+                <div class="indian-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Swami_Vivekananda-1893-09-signed.jpg/220px-Swami_Vivekananda-1893-09-signed.jpg" alt="स्वामी विवेकानंद" class="indian-photo">
+                    <div class="indian-name">स्वामी विवेकानंद</div>
+                    <div class="indian-name-english">Swami Vivekananda</div>
+                    <p class="indian-intro">युवा शक्ति के प्रेरणास्रोत। वेदांत दर्शन को विश्व में प्रस्तुत करने वाले महान संत।</p>
+                </div>
+
+                <div class="indian-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Savitribai_Phule.jpg/220px-Savitribai_Phule.jpg" alt="सावित्रीबाई फुले" class="indian-photo">
+                    <div class="indian-name">सावित्रीबाई फुले</div>
+                    <div class="indian-name-english">Savitribai Phule</div>
+                    <p class="indian-intro">भारत की पहली महिला शिक्षिका। महिला शिक्षा की अग्रदूत और समाज सुधारक।</p>
+                </div>
+
+                <div class="indian-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Kabir_Antique_Photo_Wall_hanging.jpg/220px-Kabir_Antique_Photo_Wall_hanging.jpg" alt="संत कबीर दास" class="indian-photo">
+                    <div class="indian-name">संत कबीर दास</div>
+                    <div class="indian-name-english">Sant Kabir Das</div>
+                    <p class="indian-intro">महान संत कवि और समाज सुधारक। सामाजिक समानता के पक्षधर।</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="main-footer">
         <div class="container">
@@ -414,8 +508,8 @@
     <div class="modal-overlay hidden" id="feedbackModal">
         <div class="modal-content feedback-modal">
             <button class="modal-close" onclick="closeFeedbackModal()">×</button>
-            <h3 class="modal-title">आपकी राय हमारे लिए महत्वपूर्ण है! 💬</h3>
-            <p class="modal-subtitle">कृपया अपना अनुभव साझा करें</p>
+            <h3 class="modal-title">कैसन लगल? 😄</h3>
+            <p class="modal-subtitle">तनी रुकिये न जी, अपना अनुभव बताइये!</p>
 
             <form id="feedbackForm" onsubmit="submitFeedback(event)">
                 <div class="form-group">
@@ -464,10 +558,10 @@
             </form>
 
             <div class="feedback-success hidden" id="feedbackSuccess">
-                <div class="success-icon">✅</div>
-                <h4>धन्यवाद!</h4>
-                <p>आपकी प्रतिक्रिया सफलतापूर्वक प्राप्त हो गई है।</p>
-                <p class="success-note">हम जल्द ही आपसे संपर्क करेंगे।</p>
+                <div class="success-icon">🎉</div>
+                <h4>गर्बा उड़ा देलन! 👏</h4>
+                <p>बहुत बढ़िया! आपका फीडबैक मिल गया।</p>
+                <p class="success-note">का जी, हाल चल सब ठीक ठाक बा? जल्दी संपर्क करेंगे! 😊</p>
             </div>
         </div>
     </div>
