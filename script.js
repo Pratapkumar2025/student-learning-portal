@@ -3,6 +3,17 @@
  * JavaScript for Quiz System, Leaderboard, Progress Tracking
  */
 
+const high_score_messages = [
+    "जिया हो बिहार के लाला!",
+    "आज तऽ धुआँ उड़ा देलऽ!",
+    "मिठाई कब खियावत बाड़ऽ?"
+];
+
+const low_score_messages = [
+    "तनी और जोर लगा!",
+    "का हो, नींद में बाड़ऽ का?"
+];
+
 // ===== Global State =====
 let quizState = {
     selectedClass: null,
@@ -989,6 +1000,15 @@ function finishQuiz() {
 
     const percentage = Math.round((quizState.score.correct / quizState.questions.length) * 100);
     document.getElementById('scorePercentage').textContent = `${percentage}%`;
+
+    const resultsTitle = document.querySelector('#quizResults .results-title');
+    if (percentage >= 70) {
+        const randomIndex = Math.floor(Math.random() * high_score_messages.length);
+        resultsTitle.textContent = high_score_messages[randomIndex];
+    } else {
+        const randomIndex = Math.floor(Math.random() * low_score_messages.length);
+        resultsTitle.textContent = low_score_messages[randomIndex];
+    }
 
     document.getElementById('correctAnswers').textContent = quizState.score.correct;
     document.getElementById('wrongAnswers').textContent = quizState.score.wrong;
