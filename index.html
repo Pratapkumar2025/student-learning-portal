@@ -11,6 +11,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;600;700&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Live News Ticker -->
+    <div class="news-ticker-container">
+        <div class="ticker-label">📰 ताज़ा समाचार:</div>
+        <div class="news-ticker">
+            <div class="ticker-content" id="tickerContent">
+                समाचार लोड हो रहा है...
+            </div>
+        </div>
+    </div>
+
     <!-- Header Section -->
     <header class="main-header">
         <div class="container">
@@ -62,9 +72,13 @@
                     शुरू करें क्विज़ 🚀
                 </button>
             </div>
-            <div class="motivation-quote">
-                <p class="quote-text">"ज्ञान से बड़ा कोई धन नहीं"</p>
-                <p class="quote-author">- भारतीय संस्कृति</p>
+            <!-- Daily Motivational Quote -->
+            <div class="daily-quote-card" id="dailyQuote">
+                <div class="quote-icon">💡</div>
+                <p class="quote-text-main" id="quoteText">लोड हो रहा है...</p>
+                <p class="quote-text-english" id="quoteTextEnglish"></p>
+                <p class="quote-author-name" id="quoteAuthor"></p>
+                <button class="quote-refresh-btn" onclick="refreshQuote()">🔄 नया उद्धरण</button>
             </div>
         </div>
     </section>
@@ -395,6 +409,68 @@
             </div>
         </div>
     </footer>
+
+    <!-- Feedback Modal -->
+    <div class="modal-overlay hidden" id="feedbackModal">
+        <div class="modal-content feedback-modal">
+            <button class="modal-close" onclick="closeFeedbackModal()">×</button>
+            <h3 class="modal-title">आपकी राय हमारे लिए महत्वपूर्ण है! 💬</h3>
+            <p class="modal-subtitle">कृपया अपना अनुभव साझा करें</p>
+
+            <form id="feedbackForm" onsubmit="submitFeedback(event)">
+                <div class="form-group">
+                    <label for="feedbackEmail">आपका ईमेल (वैकल्पिक)</label>
+                    <input
+                        type="email"
+                        id="feedbackEmail"
+                        class="form-input"
+                        placeholder="your@email.com"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="quizRating">क्विज़ को रेटिंग दें</label>
+                    <div class="star-rating" id="starRating">
+                        <span class="star" data-rating="1">⭐</span>
+                        <span class="star" data-rating="2">⭐</span>
+                        <span class="star" data-rating="3">⭐</span>
+                        <span class="star" data-rating="4">⭐</span>
+                        <span class="star" data-rating="5">⭐</span>
+                    </div>
+                    <input type="hidden" id="quizRating" value="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="feedbackText">आपकी प्रतिक्रिया</label>
+                    <textarea
+                        id="feedbackText"
+                        class="form-textarea"
+                        rows="4"
+                        placeholder="अपना अनुभव, सुझाव या समस्या बताएं..."
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="feedbackConsent" required>
+                        मैं अपनी प्रतिक्रिया साझा करने के लिए सहमत हूं
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-primary btn-submit">
+                    📨 प्रतिक्रिया भेजें
+                </button>
+            </form>
+
+            <div class="feedback-success hidden" id="feedbackSuccess">
+                <div class="success-icon">✅</div>
+                <h4>धन्यवाद!</h4>
+                <p>आपकी प्रतिक्रिया सफलतापूर्वक प्राप्त हो गई है।</p>
+                <p class="success-note">हम जल्द ही आपसे संपर्क करेंगे।</p>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

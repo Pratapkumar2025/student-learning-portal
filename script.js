@@ -16,8 +16,140 @@ let quizState = {
         correct: 0,
         wrong: 0,
         skipped: 0
-    }
+    },
+    attemptedQuestions: [] // Track question IDs to avoid repetition
 };
+
+// ===== Indian Mahapurush Quotes Database =====
+const mahapurushQuotes = [
+    // Kabir Das
+    {
+        hindi: "बोली एक अनमोल है, जो कोई बोलै जानि। हिये तराजू तौलि के, तब मुख बाहर आनि।",
+        english: "Speech is priceless, if you know how to speak. Weigh it in the scales of your heart before it comes out of your mouth.",
+        author: "संत कबीर दास",
+        authorEnglish: "Kabir Das",
+        icon: "📿"
+    },
+    {
+        hindi: "माटी कहे कुम्हार से, तु क्या रौंदे मोय। एक दिन ऐसा आएगा, मैं रौंदूगी तोय।",
+        english: "The clay says to the potter: Why do you tread on me? One day will come when I will tread on you.",
+        author: "संत कबीर दास",
+        authorEnglish: "Kabir Das",
+        icon: "📿"
+    },
+    {
+        hindi: "काल करे सो आज कर, आज करे सो अब। पल में परलय होएगी, बहुरि करेगा कब।",
+        english: "What you do tomorrow, do today; what you do today, do now. Destruction will come in a moment; when will you do it again?",
+        author: "संत कबीर दास",
+        authorEnglish: "Kabir Das",
+        icon: "📿"
+    },
+
+    // Mahatma Gandhi
+    {
+        hindi: "खुद वो बदलाव बनिए जो आप दुनिया में देखना चाहते हैं।",
+        english: "Be the change that you wish to see in the world.",
+        author: "महात्मा गांधी",
+        authorEnglish: "Mahatma Gandhi",
+        icon: "🕊️"
+    },
+    {
+        hindi: "कमजोर कभी माफ़ नहीं कर सकते। क्षमा करना तो ताकतवर की निशानी है।",
+        english: "The weak can never forgive. Forgiveness is the attribute of the strong.",
+        author: "महात्मा गांधी",
+        authorEnglish: "Mahatma Gandhi",
+        icon: "🕊️"
+    },
+    {
+        hindi: "थोड़ा सा अभ्यास बहुत सारे उपदेशों से बेहतर है।",
+        english: "An ounce of practice is worth more than tons of preaching.",
+        author: "महात्मा गांधी",
+        authorEnglish: "Mahatma Gandhi",
+        icon: "🕊️"
+    },
+    {
+        hindi: "शक्ति शारीरिक क्षमता से नहीं आती, यह अदम्य इच्छा शक्ति से आती है।",
+        english: "Strength does not come from physical capacity. It comes from an indomitable will.",
+        author: "महात्मा गांधी",
+        authorEnglish: "Mahatma Gandhi",
+        icon: "🕊️"
+    },
+
+    // Dr. Bhimrao Ambedkar
+    {
+        hindi: "शिक्षित बनो, संगठित रहो, संघर्ष करो।",
+        english: "Educate, Agitate, Organize.",
+        author: "डॉ. भीमराव अम्बेडकर",
+        authorEnglish: "Dr. B.R. Ambedkar",
+        icon: "📚"
+    },
+    {
+        hindi: "जीवन लंबा होने की बजाय महान होना चाहिए।",
+        english: "Life should be great rather than long.",
+        author: "डॉ. भीमराव अम्बेडकर",
+        authorEnglish: "Dr. B.R. Ambedkar",
+        icon: "📚"
+    },
+    {
+        hindi: "मैं ऐसे धर्म को मानता हूँ जो स्वतंत्रता, समानता और भाईचारा सिखाता है।",
+        english: "I measure the progress of a community by the degree of progress which women have achieved.",
+        author: "डॉ. भीमराव अम्बेडकर",
+        authorEnglish: "Dr. B.R. Ambedkar",
+        icon: "📚"
+    },
+    {
+        hindi: "ज्ञान शक्ति है और हर व्यक्ति को शिक्षित होना चाहिए।",
+        english: "Knowledge is power and every person should be educated.",
+        author: "डॉ. भीमराव अम्बेडकर",
+        authorEnglish: "Dr. B.R. Ambedkar",
+        icon: "📚"
+    },
+
+    // Swami Vivekananda
+    {
+        hindi: "उठो, जागो और तब तक नहीं रुको जब तक लक्ष्य प्राप्त न हो जाये।",
+        english: "Arise, awake, and stop not till the goal is reached.",
+        author: "स्वामी विवेकानंद",
+        authorEnglish: "Swami Vivekananda",
+        icon: "🧘"
+    },
+    {
+        hindi: "शक्ति जीवन है, निर्बलता मृत्यु है। विस्तार जीवन है, संकुचन मृत्यु है।",
+        english: "Strength is life, weakness is death. Expansion is life, contraction is death.",
+        author: "स्वामी विवेकानंद",
+        authorEnglish: "Swami Vivekananda",
+        icon: "🧘"
+    },
+    {
+        hindi: "तुम्हें कोई पढ़ा नहीं सकता, कोई आध्यात्मिक नहीं बना सकता। तुमको सब कुछ खुद अंदर से सीखना है।",
+        english: "No one can teach you, no one can make you spiritual. You yourself have to learn everything from within.",
+        author: "स्वामी विवेकानंद",
+        authorEnglish: "Swami Vivekananda",
+        icon: "🧘"
+    },
+    {
+        hindi: "जब तक आप खुद पर विश्वास नहीं करते, आप भगवान पर विश्वास नहीं कर सकते।",
+        english: "You cannot believe in God until you believe in yourself.",
+        author: "स्वामी विवेकानंद",
+        authorEnglish: "Swami Vivekananda",
+        icon: "🧘"
+    },
+    {
+        hindi: "शिक्षा मनुष्य में पहले से मौजूद पूर्णता की अभिव्यक्ति है।",
+        english: "Education is the manifestation of perfection already in man.",
+        author: "स्वामी विवेकानंद",
+        authorEnglish: "Swami Vivekananda",
+        icon: "🧘"
+    }
+];
+
+// ===== News Headlines (Fallback - Will be fetched from API) =====
+let newsHeadlines = [
+    "बिहार के छात्रों के लिए मुफ्त ऑनलाइन शिक्षा",
+    "NCERT विज्ञान प्रश्न बैंक अपडेट किया गया",
+    "लीडरबोर्ड पर अपना नाम दर्ज करें",
+    "नये अध्यायों के क्विज़ जल्द आ रहे हैं"
+];
 
 // ===== NCERT Quiz Questions Database (In Hindi) =====
 const quizDatabase = {
@@ -354,6 +486,235 @@ function scrollToQuiz() {
     document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
 }
 
+// ===== News Ticker Functions =====
+async function loadNewsHeadlines() {
+    try {
+        // Try to fetch from News on Air API (Hindi news)
+        // Note: This is a fallback approach as direct API may need CORS handling
+        const response = await fetch('https://newsonair.gov.in/wp-json/wp/v2/posts?categories=5&per_page=10');
+        const data = await response.json();
+
+        if (data && data.length > 0) {
+            newsHeadlines = data.map(item => item.title.rendered.replace(/<[^>]*>?/gm, ''));
+        }
+    } catch (error) {
+        console.log('Using fallback news headlines');
+        // Use fallback headlines already defined
+    }
+
+    updateNewsTicker();
+}
+
+function updateNewsTicker() {
+    const tickerContent = document.getElementById('tickerContent');
+    if (tickerContent) {
+        const tickerHTML = newsHeadlines.map((headline, index) =>
+            `<span class="ticker-item" data-index="${index}">${headline}</span>`
+        ).join(' ');
+        tickerContent.innerHTML = tickerHTML;
+    }
+}
+
+// Refresh news every 30 minutes
+setInterval(loadNewsHeadlines, 30 * 60 * 1000);
+
+// ===== Daily Motivational Quotes =====
+function displayDailyQuote() {
+    const quote = getRandomQuote();
+    document.getElementById('quoteText').textContent = quote.hindi;
+    document.getElementById('quoteTextEnglish').textContent = quote.english;
+    document.getElementById('quoteAuthor').textContent = `${quote.icon} ${quote.author}`;
+
+    // Save quote display time in localStorage
+    localStorage.setItem('lastQuoteTime', Date.now());
+    localStorage.setItem('currentQuote', JSON.stringify(quote));
+}
+
+function getRandomQuote() {
+    const randomIndex = Math.floor(Math.random() * mahapurushQuotes.length);
+    return mahapurushQuotes[randomIndex];
+}
+
+function refreshQuote() {
+    displayDailyQuote();
+    // Add little animation
+    const quoteCard = document.getElementById('dailyQuote');
+    quoteCard.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+        quoteCard.style.transform = 'scale(1)';
+    }, 200);
+}
+
+// Check if quote needs refresh (hourly)
+function checkQuoteRefresh() {
+    const lastTime = localStorage.getItem('lastQuoteTime');
+    const oneHour = 60 * 60 * 1000;
+
+    if (!lastTime || Date.now() - parseInt(lastTime) > oneHour) {
+        displayDailyQuote();
+    } else {
+        // Load saved quote
+        const savedQuote = localStorage.getItem('currentQuote');
+        if (savedQuote) {
+            const quote = JSON.parse(savedQuote);
+            document.getElementById('quoteText').textContent = quote.hindi;
+            document.getElementById('quoteTextEnglish').textContent = quote.english;
+            document.getElementById('quoteAuthor').textContent = `${quote.icon} ${quote.author}`;
+        } else {
+            displayDailyQuote();
+        }
+    }
+}
+
+// Auto-refresh quote every hour
+setInterval(displayDailyQuote, 60 * 60 * 1000);
+
+// ===== Feedback System =====
+function showFeedbackModal() {
+    document.getElementById('feedbackModal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+}
+
+function closeFeedbackModal() {
+    document.getElementById('feedbackModal').classList.add('hidden');
+    document.body.style.overflow = 'auto';
+
+    // Reset form
+    document.getElementById('feedbackForm').reset();
+    document.getElementById('quizRating').value = '0';
+    document.querySelectorAll('.star').forEach(star => star.classList.remove('active'));
+    document.getElementById('feedbackForm').classList.remove('hidden');
+    document.getElementById('feedbackSuccess').classList.add('hidden');
+}
+
+function submitFeedback(event) {
+    event.preventDefault();
+
+    const feedbackData = {
+        email: document.getElementById('feedbackEmail').value,
+        rating: document.getElementById('quizRating').value,
+        feedback: document.getElementById('feedbackText').value,
+        timestamp: new Date().toISOString(),
+        quizInfo: {
+            class: quizState.selectedClass,
+            subject: quizState.selectedSubject,
+            score: quizState.score
+        }
+    };
+
+    // Save feedback to localStorage
+    let allFeedback = JSON.parse(localStorage.getItem('userFeedback') || '[]');
+    allFeedback.push(feedbackData);
+    localStorage.setItem('userFeedback', JSON.stringify(allFeedback));
+
+    // Show success message
+    document.getElementById('feedbackForm').classList.add('hidden');
+    document.getElementById('feedbackSuccess').classList.remove('hidden');
+
+    // Send email notification (simulated - in production would use a service)
+    if (feedbackData.email) {
+        simulateEmailNotification(feedbackData.email);
+    }
+
+    // Auto close after 3 seconds
+    setTimeout(closeFeedbackModal, 3000);
+}
+
+function simulateEmailNotification(email) {
+    console.log(`Feedback confirmation would be sent to: ${email}`);
+    // In production, integrate with EmailJS or similar service
+}
+
+// Initialize star rating
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('star')) {
+        const rating = e.target.dataset.rating;
+        document.getElementById('quizRating').value = rating;
+
+        // Update star display
+        document.querySelectorAll('.star').forEach((star, index) => {
+            if (index < rating) {
+                star.classList.add('active');
+            } else {
+                star.classList.remove('active');
+            }
+        });
+    }
+});
+
+// ===== Smart Question Rotation =====
+function getAttemptedQuestions() {
+    return JSON.parse(localStorage.getItem('attemptedQuestions') || '{}');
+}
+
+function saveAttemptedQuestion(classNum, subject, questionIndex) {
+    const attempted = getAttemptedQuestions();
+    const key = `${classNum}_${subject}`;
+
+    if (!attempted[key]) {
+        attempted[key] = [];
+    }
+
+    if (!attempted[key].includes(questionIndex)) {
+        attempted[key].push(questionIndex);
+    }
+
+    localStorage.setItem('attemptedQuestions', JSON.stringify(attempted));
+}
+
+function getUnAttemptedQuestions(classNum, subject, allQuestions) {
+    const attempted = getAttemptedQuestions();
+    const key = `${classNum}_${subject}`;
+    const attemptedIndices = attempted[key] || [];
+
+    // If all questions attempted, reset for this subject
+    if (attemptedIndices.length >= allQuestions.length) {
+        attempted[key] = [];
+        localStorage.setItem('attemptedQuestions', JSON.stringify(attempted));
+        return allQuestions.map((q, i) => i);
+    }
+
+    // Return indices of unattempted questions
+    return allQuestions
+        .map((q, i) => i)
+        .filter(i => !attemptedIndices.includes(i));
+}
+
+function selectSmartQuestions(classNum, subject, allQuestions, count = 10) {
+    const unattemptedIndices = getUnAttemptedQuestions(classNum, subject, allQuestions);
+
+    // Shuffle unattempted questions
+    const shuffled = shuffleArray(unattemptedIndices);
+
+    // Select questions
+    const selectedIndices = shuffled.slice(0, Math.min(count, shuffled.length));
+    const selectedQuestions = selectedIndices.map(i => ({ ...allQuestions[i], originalIndex: i }));
+
+    return selectedQuestions;
+}
+
+// Reset question rotation weekly (every Monday)
+function checkWeeklyReset() {
+    const lastReset = localStorage.getItem('lastQuestionReset');
+    const now = new Date();
+    const dayOfWeek = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
+
+    if (!lastReset) {
+        localStorage.setItem('lastQuestionReset', now.toISOString());
+        return;
+    }
+
+    const lastResetDate = new Date(lastReset);
+    const daysSinceReset = Math.floor((now - lastResetDate) / (1000 * 60 * 60 * 24));
+
+    // Reset on Monday if more than 7 days have passed
+    if (dayOfWeek === 1 && daysSinceReset >= 7) {
+        localStorage.removeItem('attemptedQuestions');
+        localStorage.setItem('lastQuestionReset', now.toISOString());
+        console.log('Weekly question rotation reset completed');
+    }
+}
+
 // Mobile Navigation Toggle
 document.addEventListener('DOMContentLoaded', function() {
     const navToggle = document.querySelector('.nav-toggle');
@@ -379,6 +740,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize progress tracking
     loadProgressData();
     loadLeaderboard('today');
+
+    // Initialize new features
+    loadNewsHeadlines();
+    checkQuoteRefresh();
+    checkWeeklyReset();
 });
 
 // ===== Quiz Functions =====
@@ -412,8 +778,13 @@ function selectSubject(subject) {
         return;
     }
 
-    // Shuffle and select questions
-    quizState.questions = shuffleArray([...questions]).slice(0, 10);
+    // Use smart question rotation (no repeats in same session)
+    quizState.questions = selectSmartQuestions(
+        quizState.selectedClass,
+        subject,
+        questions,
+        10
+    );
     quizState.answers = new Array(quizState.questions.length).fill(null);
     quizState.currentQuestionIndex = 0;
 
@@ -602,9 +973,25 @@ function finishQuiz() {
         date: new Date().toISOString()
     });
 
+    // Save attempted questions for smart rotation
+    quizState.questions.forEach((question) => {
+        if (question.originalIndex !== undefined) {
+            saveAttemptedQuestion(
+                quizState.selectedClass,
+                quizState.selectedSubject,
+                question.originalIndex
+            );
+        }
+    });
+
     // Show results
     document.getElementById('quizInterface').classList.add('hidden');
     document.getElementById('quizResults').classList.remove('hidden');
+
+    // Show feedback modal after 2 seconds
+    setTimeout(() => {
+        showFeedbackModal();
+    }, 2000);
 }
 
 function retryQuiz() {
@@ -789,8 +1176,15 @@ function loadProgressData() {
 function updateLeaderboard(score) {
     let leaderboard = JSON.parse(localStorage.getItem('leaderboard') || '[]');
 
+    // Generate anonymous user ID if doesn't exist
+    let userId = localStorage.getItem('anonymousUserId');
+    if (!userId) {
+        userId = 'user_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('anonymousUserId', userId);
+    }
+
     const entry = {
-        name: `छात्र ${leaderboard.length + 1}`,
+        userId: userId, // Anonymous ID
         score: score,
         date: new Date().toISOString()
     };
@@ -815,6 +1209,7 @@ function switchLeaderboardTab(period) {
 
 function loadLeaderboard(period) {
     let leaderboard = JSON.parse(localStorage.getItem('leaderboard') || '[]');
+    const currentUserId = localStorage.getItem('anonymousUserId');
 
     // Filter by period
     const now = new Date();
@@ -835,13 +1230,33 @@ function loadLeaderboard(period) {
         return;
     }
 
-    listElement.innerHTML = leaderboard.slice(0, 10).map((entry, index) => `
-        <div class="leaderboard-item">
-            <div class="leaderboard-rank">${index + 1}</div>
-            <div class="leaderboard-name">${entry.name}</div>
-            <div class="leaderboard-score">${entry.score}%</div>
-        </div>
-    `).join('');
+    // Anonymous leaderboard - show only rank and score
+    listElement.innerHTML = leaderboard.slice(0, 10).map((entry, index) => {
+        const isCurrentUser = entry.userId === currentUserId;
+        const highlightClass = isCurrentUser ? ' style="background: #FFF8E1; border-left: 4px solid #FF6B35;"' : '';
+
+        return `
+            <div class="leaderboard-item"${highlightClass}>
+                <div class="leaderboard-rank">${index + 1}</div>
+                <div class="leaderboard-name">${isCurrentUser ? 'आप 🌟' : 'छात्र'}</div>
+                <div class="leaderboard-score">${entry.score}%</div>
+            </div>
+        `;
+    }).join('');
+
+    // Show user's overall rank if not in top 10
+    if (currentUserId) {
+        const userRank = leaderboard.findIndex(entry => entry.userId === currentUserId) + 1;
+        if (userRank > 10 && userRank <= leaderboard.length) {
+            listElement.innerHTML += `
+                <div class="leaderboard-item" style="background: #FFF8E1; border-left: 4px solid #FF6B35; margin-top: 1rem;">
+                    <div class="leaderboard-rank">${userRank}</div>
+                    <div class="leaderboard-name">आप 🌟</div>
+                    <div class="leaderboard-score">${leaderboard[userRank - 1].score}%</div>
+                </div>
+            `;
+        }
+    }
 }
 
 // ===== Study Materials =====
