@@ -375,6 +375,19 @@ Complete quiz UI overhaul for better mobile experience:
 
 **Documentation:** See `QUIZ_MOBILE_IMPROVEMENTS.md` for details
 
+#### **Latest Quiz UI Improvements (December 2025)** ✨
+- **Larger Option Text:** Increased from ~16px to 24px (desktop), 22px (mobile), 20px (small mobile)
+- **Better Readability:** Medium font weight (500) for all option text
+- **Improved Spacing:**
+  - 12px vertical spacing between options
+  - 16px gap between label badge and option text (desktop)
+  - 12px gap on mobile, 10px on small mobile
+- **Auto-Start Quiz:** Quiz now starts automatically after selecting question count
+  - No need to click "भिड़ जा! 🚀 Quiz शुरू करें" button
+  - 300ms delay for visual feedback before auto-start
+  - Smoother user experience with one less click
+- **Formatted Labels:** (A), (B), (C), (D) labels with proper spacing and visual separation
+
 ## Recently Added Features (Latest Update)
 
 ### Content Enrichment (Latest Updates)

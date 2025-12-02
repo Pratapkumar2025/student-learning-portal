@@ -525,6 +525,11 @@ function selectQuestionCount(count) {
         btn.classList.remove('selected');
     });
     event.target.classList.add('selected');
+
+    // Auto-start the quiz after a brief moment for visual feedback
+    setTimeout(() => {
+        startSubjectQuiz();
+    }, 300);
 }
 
 function backToSubjectSelection() {
