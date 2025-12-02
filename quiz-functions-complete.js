@@ -63,7 +63,7 @@ function loadQuestion() {
 
         question.options.forEach((option, index) => {
             const button = document.createElement('button');
-            button.className = 'option-button';
+            button.className = 'option-btn';
 
             const letter = String.fromCharCode(65 + index);
             button.innerHTML = '<span class="option-letter">' + letter + '</span><span class="option-text">' + option + '</span>';
@@ -97,9 +97,9 @@ function selectOption(optionIndex) {
     quizState.answers[quizState.currentQuestionIndex] = optionIndex;
 
     // Update UI - show correct/wrong
-    const options = document.querySelectorAll('.option-button');
+    const options = document.querySelectorAll('.option-btn');
     options.forEach((btn, idx) => {
-        btn.classList.remove('selected', 'correct', 'incorrect');
+        btn.classList.remove('selected', 'correct', 'wrong');
         btn.disabled = true;
 
         if (idx === optionIndex) {
@@ -111,7 +111,7 @@ function selectOption(optionIndex) {
                     window.gamification.onCorrectAnswer(btn);
                 }
             } else {
-                btn.classList.add('incorrect');
+                btn.classList.add('wrong');
                 // Gamification: Wrong answer
                 console.log('❌ Wrong answer! Gamification:', window.gamification ? 'Available' : 'NOT AVAILABLE');
                 if (window.gamification) {

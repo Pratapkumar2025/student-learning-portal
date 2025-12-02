@@ -1032,7 +1032,7 @@ function loadQuestion() {
 
     question.options.forEach((option, index) => {
         const button = document.createElement('button');
-        button.className = 'option-button';
+        button.className = 'option-btn';
         button.innerHTML = `
             <span class="option-letter">${String.fromCharCode(65 + index)}</span>
             <span class="option-text">${option}</span>
@@ -1067,16 +1067,16 @@ function selectOption(optionIndex) {
     quizState.answers[quizState.currentQuestionIndex] = optionIndex;
 
     // Update UI
-    const options = document.querySelectorAll('.option-button');
+    const options = document.querySelectorAll('.option-btn');
     options.forEach((btn, idx) => {
-        btn.classList.remove('selected', 'correct', 'incorrect');
+        btn.classList.remove('selected', 'correct', 'wrong');
         btn.disabled = true;
 
         if (idx === optionIndex) {
             if (idx === question.correct) {
                 btn.classList.add('correct');
             } else {
-                btn.classList.add('incorrect');
+                btn.classList.add('wrong');
             }
         }
 
