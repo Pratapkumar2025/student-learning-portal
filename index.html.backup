@@ -89,6 +89,168 @@
         </div>
     </section>
 
+    <!-- Did You Know Section (क्या आप जानते हैं?) -->
+    <section id="did-you-know" class="did-you-know-section">
+        <div class="container">
+            <h2 class="section-title">क्या आप जानते हैं? 🤔</h2>
+            <p class="section-subtitle">रोज़ाना नई और रोचक जानकारी - विकिपीडिया से</p>
+            <p class="section-tagline">ज्ञान के भण्डार से कुछ मज़ेदार तथ्य! 📚✨</p>
+
+            <div class="wiki-content-wrapper">
+                <!-- Daily Featured Content from Hindi Wikipedia -->
+                <div class="daily-facts-card">
+                    <div class="facts-header">
+                        <span class="facts-icon">💡</span>
+                        <h3>आज की रोचक जानकारियाँ</h3>
+                        <span class="date-badge" id="didYouKnowDate"></span>
+                    </div>
+
+                    <div class="facts-list" id="didYouKnowContent">
+                        <!-- Sample content - will be replaced by JavaScript from Wikipedia API -->
+                        <div class="fact-item">
+                            <span class="fact-bullet">•</span>
+                            <p>...भारत की पहली महिला शिक्षिका <strong>सावित्रीबाई फुले</strong> को अपने स्कूल जाते समय लोग गोबर और पत्थर फेंकते थे, लेकिन उन्होंने हार नहीं मानी?</p>
+                        </div>
+                        <div class="fact-item">
+                            <span class="fact-bullet">•</span>
+                            <p>...भारत के राष्ट्रगान "<strong>जन गण मन</strong>" को गाने में केवल 52 सेकंड का समय लगता है?</p>
+                        </div>
+                        <div class="fact-item">
+                            <span class="fact-bullet">•</span>
+                            <p>...<strong>चंद्रयान-3</strong> ने भारत को चांद के दक्षिणी ध्रुव पर उतरने वाला पहला देश बना दिया?</p>
+                        </div>
+                        <div class="fact-item">
+                            <span class="fact-bullet">•</span>
+                            <p>...<strong>शून्य (0)</strong> की खोज भारत में हुई थी और इसे दुनिया को भारतीय गणितज्ञ आर्यभट्ट ने दिया?</p>
+                        </div>
+                        <div class="fact-item">
+                            <span class="fact-bullet">•</span>
+                            <p>...बिहार का <strong>नालंदा विश्वविद्यालय</strong> दुनिया का सबसे पुराना विश्वविद्यालय था, जहाँ 10,000+ छात्र पढ़ते थे?</p>
+                        </div>
+                    </div>
+
+                    <div class="facts-footer">
+                        <button class="refresh-facts-btn" onclick="refreshDidYouKnow()">
+                            🔄 नई जानकारियाँ लोड करें
+                        </button>
+                        <a href="https://hi.wikipedia.org/wiki/%E0%A4%AE%E0%A5%81%E0%A4%96%E0%A4%AA%E0%A5%83%E0%A4%B7%E0%A5%8D%E0%A4%A0" target="_blank" class="wiki-link">
+                            📖 हिन्दी विकिपीडिया पर और पढ़ें
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Info Box -->
+                <div class="wiki-info-box">
+                    <div class="info-icon">ℹ️</div>
+                    <h4>यह जानकारी कहाँ से आती है?</h4>
+                    <p>यह सभी तथ्य <strong>हिन्दी विकिपीडिया</strong> के "क्या आप जानते हैं?" अनुभाग से लिए गए हैं। विकिपीडिया एक मुफ्त ज्ञानकोश है जहाँ लाखों लेख उपलब्ध हैं।</p>
+                    <p class="info-tip">💡 <strong>टिप:</strong> रोज़ाना नई जानकारी के लिए "नई जानकारियाँ लोड करें" बटन दबाएं!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Today's Featured Picture Section -->
+    <section id="featured-picture" class="featured-picture-section">
+        <div class="container">
+            <h2 class="section-title">आज की विशेष तस्वीर 📷</h2>
+            <p class="section-subtitle">Today's Featured Picture - Wikipedia से दुनिया की बेहतरीन तस्वीरें</p>
+            <p class="section-tagline">हर दिन एक नई और अद्भुत तस्वीर! 🌍✨</p>
+
+            <div class="featured-picture-wrapper">
+                <!-- Main Featured Picture Card -->
+                <div class="featured-pic-card">
+                    <div class="pic-date-header">
+                        <span class="calendar-icon">📅</span>
+                        <span class="pic-date" id="featuredPicDate"></span>
+                        <span class="pic-badge">Featured Picture of the Day</span>
+                    </div>
+
+                    <div class="featured-image-container">
+                        <img id="featuredPicImage"
+                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Taj_Mahal_in_March_2004.jpg/800px-Taj_Mahal_in_March_2004.jpg"
+                             alt="Today's Featured Picture"
+                             class="featured-picture">
+                        <div class="image-overlay">
+                            <button class="view-fullscreen-btn" onclick="viewFullscreen()">🔍 पूरी स्क्रीन में देखें</button>
+                        </div>
+                    </div>
+
+                    <div class="pic-details">
+                        <h3 id="featuredPicTitle">ताज महल, आगरा</h3>
+                        <div class="pic-description" id="featuredPicDescription">
+                            <p>ताजमहल भारत के आगरा शहर में स्थित एक विश्व धरोहर मक़बरा है। इसका निर्माण मुगल सम्राट शाहजहाँ ने अपनी पत्नी मुमताज़ महल की याद में करवाया था। यह प्रेम का प्रतीक माना जाता है और दुनिया के सात अजूबों में से एक है।</p>
+                        </div>
+
+                        <div class="pic-metadata">
+                            <div class="metadata-item">
+                                <span class="meta-label">📸 फोटोग्राफर:</span>
+                                <span class="meta-value" id="featuredPicPhotographer">Wikipedia Commons</span>
+                            </div>
+                            <div class="metadata-item">
+                                <span class="meta-label">📍 स्थान:</span>
+                                <span class="meta-value" id="featuredPicLocation">Agra, India</span>
+                            </div>
+                            <div class="metadata-item">
+                                <span class="meta-label">🏷️ श्रेणी:</span>
+                                <span class="meta-value" id="featuredPicCategory">Architecture, Heritage</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pic-actions">
+                        <button class="pic-action-btn" onclick="shareFeaturedPic()">
+                            <span>📤</span> शेयर करें
+                        </button>
+                        <button class="pic-action-btn" onclick="downloadFeaturedPic()">
+                            <span>💾</span> डाउनलोड करें
+                        </button>
+                        <button class="pic-action-btn" onclick="refreshFeaturedPic()">
+                            <span>🔄</span> नई तस्वीर लोड करें
+                        </button>
+                        <a href="https://en.wikipedia.org/wiki/Main_Page" target="_blank" class="pic-action-btn wiki-btn">
+                            <span>🌐</span> Wikipedia पर देखें
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Picture Info Sidebar -->
+                <div class="picture-info-sidebar">
+                    <div class="sidebar-section">
+                        <h4>🎨 Featured Picture क्या है?</h4>
+                        <p>Wikipedia हर दिन एक विशेष तस्वीर चुनता है जो उच्च गुणवत्ता, ऐतिहासिक महत्व, या शैक्षिक मूल्य के लिए चुनी जाती है।</p>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h4>📚 कुछ रोचक तथ्य</h4>
+                        <ul class="sidebar-facts">
+                            <li>• Wikipedia Commons पर 9 करोड़+ मुफ्त तस्वीरें हैं</li>
+                            <li>• सभी तस्वीरें मुफ्त में उपयोग की जा सकती हैं</li>
+                            <li>• हर दिन हज़ारों नई तस्वीरें जोड़ी जाती हैं</li>
+                            <li>• दुनिया भर के photographers योगदान करते हैं</li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h4>🔍 और तस्वीरें देखें</h4>
+                        <div class="related-categories">
+                            <a href="https://commons.wikimedia.org/wiki/Category:Nature" target="_blank" class="category-tag">🌿 Nature</a>
+                            <a href="https://commons.wikimedia.org/wiki/Category:Architecture" target="_blank" class="category-tag">🏛️ Architecture</a>
+                            <a href="https://commons.wikimedia.org/wiki/Category:Science" target="_blank" class="category-tag">🔬 Science</a>
+                            <a href="https://commons.wikimedia.org/wiki/Category:History" target="_blank" class="category-tag">📜 History</a>
+                            <a href="https://commons.wikimedia.org/wiki/Category:India" target="_blank" class="category-tag">🇮🇳 India</a>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section motivational">
+                        <h4>📸 क्या आप जानते हैं?</h4>
+                        <p class="motivation-text">आप भी अपनी तस्वीरें Wikipedia Commons पर upload कर सकते हैं और लाखों लोगों के साथ share कर सकते हैं!</p>
+                        <p class="bihari-quote">तस्वीर खींचो, दुनिया के साथ बांटो! 📷✨</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Quiz Section -->
     <section id="quiz" class="quiz-section">
@@ -1956,169 +2118,6 @@
     </section>
 
     <!-- User Feedback Section -->
-    <!-- Did You Know Section (क्या आप जानते हैं?) -->
-    <section id="did-you-know" class="did-you-know-section">
-        <div class="container">
-            <h2 class="section-title">क्या आप जानते हैं? 🤔</h2>
-            <p class="section-subtitle">रोज़ाना नई और रोचक जानकारी - विकिपीडिया से</p>
-            <p class="section-tagline">ज्ञान के भण्डार से कुछ मज़ेदार तथ्य! 📚✨</p>
-
-            <div class="wiki-content-wrapper">
-                <!-- Daily Featured Content from Hindi Wikipedia -->
-                <div class="daily-facts-card">
-                    <div class="facts-header">
-                        <span class="facts-icon">💡</span>
-                        <h3>आज की रोचक जानकारियाँ</h3>
-                        <span class="date-badge" id="didYouKnowDate"></span>
-                    </div>
-
-                    <div class="facts-list" id="didYouKnowContent">
-                        <!-- Sample content - will be replaced by JavaScript from Wikipedia API -->
-                        <div class="fact-item">
-                            <span class="fact-bullet">•</span>
-                            <p>...भारत की पहली महिला शिक्षिका <strong>सावित्रीबाई फुले</strong> को अपने स्कूल जाते समय लोग गोबर और पत्थर फेंकते थे, लेकिन उन्होंने हार नहीं मानी?</p>
-                        </div>
-                        <div class="fact-item">
-                            <span class="fact-bullet">•</span>
-                            <p>...भारत के राष्ट्रगान "<strong>जन गण मन</strong>" को गाने में केवल 52 सेकंड का समय लगता है?</p>
-                        </div>
-                        <div class="fact-item">
-                            <span class="fact-bullet">•</span>
-                            <p>...<strong>चंद्रयान-3</strong> ने भारत को चांद के दक्षिणी ध्रुव पर उतरने वाला पहला देश बना दिया?</p>
-                        </div>
-                        <div class="fact-item">
-                            <span class="fact-bullet">•</span>
-                            <p>...<strong>शून्य (0)</strong> की खोज भारत में हुई थी और इसे दुनिया को भारतीय गणितज्ञ आर्यभट्ट ने दिया?</p>
-                        </div>
-                        <div class="fact-item">
-                            <span class="fact-bullet">•</span>
-                            <p>...बिहार का <strong>नालंदा विश्वविद्यालय</strong> दुनिया का सबसे पुराना विश्वविद्यालय था, जहाँ 10,000+ छात्र पढ़ते थे?</p>
-                        </div>
-                    </div>
-
-                    <div class="facts-footer">
-                        <button class="refresh-facts-btn" onclick="refreshDidYouKnow()">
-                            🔄 नई जानकारियाँ लोड करें
-                        </button>
-                        <a href="https://hi.wikipedia.org/wiki/%E0%A4%AE%E0%A5%81%E0%A4%96%E0%A4%AA%E0%A5%83%E0%A4%B7%E0%A5%8D%E0%A4%A0" target="_blank" class="wiki-link">
-                            📖 हिन्दी विकिपीडिया पर और पढ़ें
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Info Box -->
-                <div class="wiki-info-box">
-                    <div class="info-icon">ℹ️</div>
-                    <h4>यह जानकारी कहाँ से आती है?</h4>
-                    <p>यह सभी तथ्य <strong>हिन्दी विकिपीडिया</strong> के "क्या आप जानते हैं?" अनुभाग से लिए गए हैं। विकिपीडिया एक मुफ्त ज्ञानकोश है जहाँ लाखों लेख उपलब्ध हैं।</p>
-                    <p class="info-tip">💡 <strong>टिप:</strong> रोज़ाना नई जानकारी के लिए "नई जानकारियाँ लोड करें" बटन दबाएं!</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Today's Featured Picture Section -->
-    <section id="featured-picture" class="featured-picture-section">
-        <div class="container">
-            <h2 class="section-title">आज की विशेष तस्वीर 📷</h2>
-            <p class="section-subtitle">Today's Featured Picture - Wikipedia से दुनिया की बेहतरीन तस्वीरें</p>
-            <p class="section-tagline">हर दिन एक नई और अद्भुत तस्वीर! 🌍✨</p>
-
-            <div class="featured-picture-wrapper">
-                <!-- Main Featured Picture Card -->
-                <div class="featured-pic-card">
-                    <div class="pic-date-header">
-                        <span class="calendar-icon">📅</span>
-                        <span class="pic-date" id="featuredPicDate"></span>
-                        <span class="pic-badge">Featured Picture of the Day</span>
-                    </div>
-
-                    <div class="featured-image-container">
-                        <img id="featuredPicImage"
-                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Taj_Mahal_in_March_2004.jpg/800px-Taj_Mahal_in_March_2004.jpg"
-                             alt="Today's Featured Picture"
-                             class="featured-picture">
-                        <div class="image-overlay">
-                            <button class="view-fullscreen-btn" onclick="viewFullscreen()">🔍 पूरी स्क्रीन में देखें</button>
-                        </div>
-                    </div>
-
-                    <div class="pic-details">
-                        <h3 id="featuredPicTitle">ताज महल, आगरा</h3>
-                        <div class="pic-description" id="featuredPicDescription">
-                            <p>ताजमहल भारत के आगरा शहर में स्थित एक विश्व धरोहर मक़बरा है। इसका निर्माण मुगल सम्राट शाहजहाँ ने अपनी पत्नी मुमताज़ महल की याद में करवाया था। यह प्रेम का प्रतीक माना जाता है और दुनिया के सात अजूबों में से एक है।</p>
-                        </div>
-
-                        <div class="pic-metadata">
-                            <div class="metadata-item">
-                                <span class="meta-label">📸 फोटोग्राफर:</span>
-                                <span class="meta-value" id="featuredPicPhotographer">Wikipedia Commons</span>
-                            </div>
-                            <div class="metadata-item">
-                                <span class="meta-label">📍 स्थान:</span>
-                                <span class="meta-value" id="featuredPicLocation">Agra, India</span>
-                            </div>
-                            <div class="metadata-item">
-                                <span class="meta-label">🏷️ श्रेणी:</span>
-                                <span class="meta-value" id="featuredPicCategory">Architecture, Heritage</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="pic-actions">
-                        <button class="pic-action-btn" onclick="shareFeaturedPic()">
-                            <span>📤</span> शेयर करें
-                        </button>
-                        <button class="pic-action-btn" onclick="downloadFeaturedPic()">
-                            <span>💾</span> डाउनलोड करें
-                        </button>
-                        <button class="pic-action-btn" onclick="refreshFeaturedPic()">
-                            <span>🔄</span> नई तस्वीर लोड करें
-                        </button>
-                        <a href="https://en.wikipedia.org/wiki/Main_Page" target="_blank" class="pic-action-btn wiki-btn">
-                            <span>🌐</span> Wikipedia पर देखें
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Picture Info Sidebar -->
-                <div class="picture-info-sidebar">
-                    <div class="sidebar-section">
-                        <h4>🎨 Featured Picture क्या है?</h4>
-                        <p>Wikipedia हर दिन एक विशेष तस्वीर चुनता है जो उच्च गुणवत्ता, ऐतिहासिक महत्व, या शैक्षिक मूल्य के लिए चुनी जाती है।</p>
-                    </div>
-
-                    <div class="sidebar-section">
-                        <h4>📚 कुछ रोचक तथ्य</h4>
-                        <ul class="sidebar-facts">
-                            <li>• Wikipedia Commons पर 9 करोड़+ मुफ्त तस्वीरें हैं</li>
-                            <li>• सभी तस्वीरें मुफ्त में उपयोग की जा सकती हैं</li>
-                            <li>• हर दिन हज़ारों नई तस्वीरें जोड़ी जाती हैं</li>
-                            <li>• दुनिया भर के photographers योगदान करते हैं</li>
-                        </ul>
-                    </div>
-
-                    <div class="sidebar-section">
-                        <h4>🔍 और तस्वीरें देखें</h4>
-                        <div class="related-categories">
-                            <a href="https://commons.wikimedia.org/wiki/Category:Nature" target="_blank" class="category-tag">🌿 Nature</a>
-                            <a href="https://commons.wikimedia.org/wiki/Category:Architecture" target="_blank" class="category-tag">🏛️ Architecture</a>
-                            <a href="https://commons.wikimedia.org/wiki/Category:Science" target="_blank" class="category-tag">🔬 Science</a>
-                            <a href="https://commons.wikimedia.org/wiki/Category:History" target="_blank" class="category-tag">📜 History</a>
-                            <a href="https://commons.wikimedia.org/wiki/Category:India" target="_blank" class="category-tag">🇮🇳 India</a>
-                        </div>
-                    </div>
-
-                    <div class="sidebar-section motivational">
-                        <h4>📸 क्या आप जानते हैं?</h4>
-                        <p class="motivation-text">आप भी अपनी तस्वीरें Wikipedia Commons पर upload कर सकते हैं और लाखों लोगों के साथ share कर सकते हैं!</p>
-                        <p class="bihari-quote">तस्वीर खींचो, दुनिया के साथ बांटो! 📷✨</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section id="user-feedback" class="user-feedback-section">
         <div class="container">
             <h2 class="section-title">फीडबैक - कैसन लगल? 💬</h2>

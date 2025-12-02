@@ -1337,3 +1337,36 @@ function getSubjectName(subject) {
     };
     return names[subject] || subject;
 }
+
+// ===== Dark Mode Toggle =====
+function toggleDarkMode() {
+    const body = document.body;
+    const darkModeIcon = document.getElementById('darkModeIcon');
+    const darkModeText = document.getElementById('darkModeText');
+
+    body.classList.toggle('dark-mode');
+
+    // Update icon and text
+    if (body.classList.contains('dark-mode')) {
+        darkModeIcon.textContent = '☀️';
+        darkModeText.textContent = 'Light Mode';
+        localStorage.setItem('darkMode', 'enabled');
+    } else {
+        darkModeIcon.textContent = '🌙';
+        darkModeText.textContent = 'Dark Mode';
+        localStorage.setItem('darkMode', 'disabled');
+    }
+}
+
+// Load dark mode preference on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const darkModePreference = localStorage.getItem('darkMode');
+    const darkModeIcon = document.getElementById('darkModeIcon');
+    const darkModeText = document.getElementById('darkModeText');
+
+    if (darkModePreference === 'enabled') {
+        document.body.classList.add('dark-mode');
+        darkModeIcon.textContent = '☀️';
+        darkModeText.textContent = 'Light Mode';
+    }
+});
