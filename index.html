@@ -69,7 +69,7 @@
             <div class="hero-content">
                 <h2 class="hero-title">भौकाल टाइट, भविष्य ब्राइट! 🙏</h2>
                 <p class="hero-subtitle">NCERT विज्ञान (कक्षा 5-10) की मुफ्त ऑनलाइन क्विज़ और अध्ययन सामग्री</p>
-                <p class="hero-wisdom">अब राजा के बेटा राजा ना बनी, जे पढ़त उहे बनी! 📚✨</p>
+                <p class="hero-wisdom">पढ़ाई से बदलऽ अपन किस्मत, बिहार के हर बच्चा बनी जननायक! 💪✨</p>
                 <button class="cta-button" onclick="scrollToQuiz()">
                     भिड़ जा! 🚀
                 </button>
@@ -94,43 +94,13 @@
     <section id="quiz" class="quiz-section">
         <div class="container">
             <h2 class="section-title">विज्ञान क्विज़ 📚</h2>
-            <p class="section-subtitle">कमर कस लऽ! अपने कक्षा चुनें और टेस्ट शुरू करें</p>
-            <p class="section-tagline">जे टिकत, उहे दिखत! 💪</p>
+            <p class="section-subtitle">कमर कस लऽ! अपने विषय चुनें और टेस्ट शुरू करें</p>
+            <p class="section-tagline">जे टिकत, उहे दिखत! 💪 | सरल से कठिन - सब कुछ मिला के! 🎯</p>
 
-            <!-- Class Selection -->
-            <div class="class-selection" id="classSelection">
-                <div class="class-grid">
-                    <button class="class-card" onclick="selectClass(5)">
-                        <span class="class-number">5</span>
-                        <span class="class-label">कक्षा</span>
-                    </button>
-                    <button class="class-card" onclick="selectClass(6)">
-                        <span class="class-number">6</span>
-                        <span class="class-label">कक्षा</span>
-                    </button>
-                    <button class="class-card" onclick="selectClass(7)">
-                        <span class="class-number">7</span>
-                        <span class="class-label">कक्षा</span>
-                    </button>
-                    <button class="class-card" onclick="selectClass(8)">
-                        <span class="class-number">8</span>
-                        <span class="class-label">कक्षा</span>
-                    </button>
-                    <button class="class-card" onclick="selectClass(9)">
-                        <span class="class-number">9</span>
-                        <span class="class-label">कक्षा</span>
-                    </button>
-                    <button class="class-card" onclick="selectClass(10)">
-                        <span class="class-number">10</span>
-                        <span class="class-label">कक्षा</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Subject Selection -->
-            <div class="subject-selection hidden" id="subjectSelection">
-                <button class="back-button" onclick="backToClassSelection()">← वापस जाएं</button>
-                <h3 class="selection-title">विषय चुनें</h3>
+            <!-- Subject Selection (DIRECT - No Class Selection) -->
+            <div class="subject-selection" id="subjectSelection">
+                <h3 class="selection-title">📖 अपना विषय चुनें</h3>
+                <p class="selection-description">सभी स्तर के प्रश्न (आसान, मध्यम, कठिन) एक साथ मिले हुए!</p>
                 <div class="subject-grid">
                     <button class="subject-card" onclick="selectSubject('physics')">
                         <span class="subject-icon">⚛️</span>
@@ -151,11 +121,12 @@
                 </div>
             </div>
 
-            <!-- Quiz Customization -->
-            <div class="quiz-customization hidden" id="quizCustomization">
+            <!-- Question Count Selection -->
+            <div class="quiz-customization hidden" id="questionCountSelection">
                 <button class="back-button" onclick="backToSubjectSelection()">← पिछुलका पे चल</button>
                 <div class="quiz-customization-card">
-                    <h3 class="customization-title">कतना सवाल लड़ाई करबऽ? 🤔</h3>
+                    <h3 class="customization-title"><span id="selectedSubjectName">विज्ञान</span> - कतना सवाल लड़ाई करबऽ? 🤔</h3>
+                    <p class="difficulty-info">⚡ आसान → 📚 मध्यम → 🔥 कठिन (मिक्स्ड)</p>
                     <div class="customization-options">
                         <div class="option-card" onclick="selectQuestionCount(10)">
                             <div>
@@ -179,6 +150,9 @@
                             <span>🎯</span>
                         </div>
                     </div>
+                    <button class="start-quiz-btn" onclick="startSubjectQuiz()">
+                        भिड़ जा! 🚀 Quiz शुरू करें
+                    </button>
                 </div>
             </div>
 
@@ -217,7 +191,10 @@
                 </div>
 
                 <div class="question-card">
-                    <h3 class="question-text" id="questionText">प्रश्न यहाँ दिखेगा...</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <h3 class="question-text" id="questionText" style="flex: 1; margin: 0;">प्रश्न यहाँ दिखेगा...</h3>
+                        <span class="difficulty-badge" id="difficultyBadge" style="font-size: 0.9rem; padding: 0.3rem 0.8rem; border-radius: 20px; background: var(--primary-saffron); color: white; white-space: nowrap; margin-left: 1rem;">⚡ आसान</span>
+                    </div>
                     <div class="options-container" id="optionsContainer">
                         <!-- Options will be inserted here by JavaScript -->
                     </div>
@@ -228,8 +205,9 @@
                 </div>
 
                 <div class="quiz-controls">
-                    <button class="quiz-button secondary" onclick="skipQuestion()" id="skipBtn">छोड़ें</button>
-                    <button class="quiz-button primary" onclick="nextQuestion()" id="nextBtn" disabled>अगुलका देखाव!</button>
+                    <button class="quiz-button secondary" onclick="skipQuestion()" id="skipBtn">माफ करीं गुरु! 🙏</button>
+                    <button class="quiz-button primary" onclick="nextQuestion()" id="nextBtn" disabled>चल गुरु, आगे!</button>
+                    <button class="quiz-button primary hidden" onclick="submitQuiz()" id="submitBtn">Submit करें! 🎯</button>
                 </div>
             </div>
 
@@ -2203,8 +2181,6 @@
             <div class="footer-bottom">
                 <p class="footer-wisdom">अधजल गगरी छलकत जाय, भरा गगरिया चुपके जाय। (विनम्र रहें) 🙏</p>
                 <p>&copy; 2025 हमार पढ़ाई | सभी अधिकार सुरक्षित | बनाया गया प्यार से ❤️ प्रताप कुमार द्वारा</p>
-                <p class="footer-tagline">जे पढ़तई, उहे गढ़तई! 🌟 | पढ़ाई चांप के, नौकरी लांप के! 🚀</p>
-                <p class="footer-motivation">सोवत है, से खोवत है। लिट्टी-चोखा खाए के, IAS बन के आए के! 💪📚</p>
             </div>
         </div>
     </footer>
@@ -2563,5 +2539,12 @@
     </script>
 
     <script src="script.js"></script>
+    <script src="quiz-system-new.js"></script>
+    <script src="quiz-functions-complete.js"></script>
+    <script src="script-enhancements.js"></script>
+
+    <!-- Gamification System -->
+    <link rel="stylesheet" href="gamification-styles.css">
+    <script src="gamification-system.js"></script>
 </body>
 </html>

@@ -15,6 +15,9 @@ const low_score_messages = [
 ];
 
 // ===== Global State =====
+// NOTE: quizState is now defined in quiz-system-new.js (subject-wise system)
+// Old class-wise quizState commented out to avoid conflicts
+/*
 let quizState = {
     selectedClass: null,
     selectedSubject: null,
@@ -31,6 +34,7 @@ let quizState = {
     },
     attemptedQuestions: [] // Track question IDs to avoid repetition
 };
+*/
 
 // ===== Indian Mahapurush Quotes Database =====
 const mahapurushQuotes = [
@@ -760,6 +764,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ===== Quiz Functions =====
+// NOTE: Old class-based quiz functions below are now REPLACED by:
+// - quiz-system-new.js (subject-wise questions with mixed difficulty)
+// - quiz-functions-complete.js (timer, loadQuestion, selectOption, navigation, results)
+// These old functions are kept for reference but should NOT be used
+// ====================================================================
+
 function selectClass(classNumber) {
     quizState.selectedClass = classNumber;
 
@@ -1075,84 +1085,223 @@ function resetQuizState() {
 
 // ===== Certificate Generation =====
 function downloadCertificate() {
-    const percentage = Math.round((quizState.score.correct / quizState.questions.length) * 100);
+    // Ask for student name (mandatory)
+    let studentName = null;
+    while (!studentName || studentName.trim() === '') {
+        studentName = prompt('🎓 प्रमाण पत्र के लिए अपना पूरा नाम लिखें:\n(Certificate के लिए नाम जरूरी है)\n\nEnter your full name for certificate:');
 
-    // Create canvas for certificate
+        if (studentName === null) {
+            // User clicked Cancel
+            alert('❌ Certificate download रद्द कर दिया गया।\nCertificate download cancelled.');
+            return;
+        }
+
+        if (!studentName || studentName.trim() === '') {
+            alert('⚠️ नाम खाली नहीं हो सकता! कृपया अपना नाम लिखें।\nName cannot be empty! Please enter your name.');
+        }
+    }
+
+    // Trim and validate name length
+    studentName = studentName.trim();
+    if (studentName.length < 2) {
+        alert('⚠️ कृपया वैध नाम लिखें (कम से कम 2 अक्षर)।\nPlease enter a valid name (at least 2 characters).');
+        return;
+    }
+
+    const percentage = Math.round((quizState.score.correct / quizState.questions.length) * 100);
+    const now = new Date();
+    const downloadDate = now.toLocaleDateString('hi-IN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+    const downloadTime = now.toLocaleTimeString('hi-IN', {
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+
+    // Create canvas for certificate (professional size)
     const canvas = document.createElement('canvas');
     canvas.width = 1200;
-    canvas.height = 800;
+    canvas.height = 900;
     const ctx = canvas.getContext('2d');
 
-    // Background gradient (Chhath theme colors)
+    // Background - Elegant cream gradient
     const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-    gradient.addColorStop(0, '#FFF8E1');
-    gradient.addColorStop(1, '#FFE0B2');
+    gradient.addColorStop(0, '#FFFBF5');
+    gradient.addColorStop(0.5, '#FFF8E8');
+    gradient.addColorStop(1, '#FFEFD5');
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Border
+    // Decorative corner ornaments
+    ctx.strokeStyle = '#B8860B';
+    ctx.lineWidth = 3;
+    // Top-left
+    ctx.beginPath();
+    ctx.moveTo(80, 80);
+    ctx.lineTo(180, 80);
+    ctx.moveTo(80, 80);
+    ctx.lineTo(80, 180);
+    ctx.stroke();
+    // Top-right
+    ctx.beginPath();
+    ctx.moveTo(canvas.width - 80, 80);
+    ctx.lineTo(canvas.width - 180, 80);
+    ctx.moveTo(canvas.width - 80, 80);
+    ctx.lineTo(canvas.width - 80, 180);
+    ctx.stroke();
+    // Bottom-left
+    ctx.beginPath();
+    ctx.moveTo(80, canvas.height - 80);
+    ctx.lineTo(180, canvas.height - 80);
+    ctx.moveTo(80, canvas.height - 80);
+    ctx.lineTo(80, canvas.height - 180);
+    ctx.stroke();
+    // Bottom-right
+    ctx.beginPath();
+    ctx.moveTo(canvas.width - 80, canvas.height - 80);
+    ctx.lineTo(canvas.width - 180, canvas.height - 80);
+    ctx.moveTo(canvas.width - 80, canvas.height - 80);
+    ctx.lineTo(canvas.width - 80, canvas.height - 180);
+    ctx.stroke();
+
+    // Triple border for professional look
+    ctx.strokeStyle = '#DAA520';
+    ctx.lineWidth = 12;
+    ctx.strokeRect(50, 50, canvas.width - 100, canvas.height - 100);
+
     ctx.strokeStyle = '#FF6B35';
-    ctx.lineWidth = 20;
-    ctx.strokeRect(40, 40, canvas.width - 80, canvas.height - 80);
+    ctx.lineWidth = 4;
+    ctx.strokeRect(70, 70, canvas.width - 140, canvas.height - 140);
 
-    // Inner border
     ctx.strokeStyle = '#FFC107';
-    ctx.lineWidth = 5;
-    ctx.strokeRect(60, 60, canvas.width - 120, canvas.height - 120);
+    ctx.lineWidth = 2;
+    ctx.strokeRect(85, 85, canvas.width - 170, canvas.height - 170);
 
-    // Title
+    // Gold seal/badge at top center
+    ctx.fillStyle = '#FFD700';
+    ctx.beginPath();
+    ctx.arc(canvas.width / 2, 130, 45, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = '#DAA520';
+    ctx.lineWidth = 4;
+    ctx.stroke();
+
+    // Star in seal
     ctx.fillStyle = '#FF6B35';
-    ctx.font = 'bold 60px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('प्रमाण पत्र', canvas.width / 2, 150);
-
-    // Subtitle
-    ctx.fillStyle = '#3E2723';
-    ctx.font = '30px Arial';
-    ctx.fillText('हमार पढ़ाई - बिहार के होनहार छात्र का अड्डा', canvas.width / 2, 200);
-
-    // Achievement text
-    ctx.font = '35px Arial';
-    ctx.fillText('यह प्रमाणित किया जाता है कि', canvas.width / 2, 300);
-
-    // Student name placeholder
-    ctx.fillStyle = '#D32F2F';
     ctx.font = 'bold 45px Arial';
-    ctx.fillText('छात्र', canvas.width / 2, 370);
+    ctx.textAlign = 'center';
+    ctx.fillText('★', canvas.width / 2, 145);
+
+    // Title - Certificate of Achievement
+    ctx.fillStyle = '#8B4513';
+    ctx.font = 'bold 65px Georgia';
+    ctx.fillText('प्रमाण पत्र', canvas.width / 2, 220);
+
+    // Subtitle with underline decoration
+    ctx.fillStyle = '#654321';
+    ctx.font = '28px Georgia';
+    ctx.fillText('हमार पढ़ाई - बिहार के होनहार छात्र का अड्डा', canvas.width / 2, 270);
+
+    // Underline decoration
+    ctx.strokeStyle = '#FFC107';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(350, 280);
+    ctx.lineTo(850, 280);
+    ctx.stroke();
+
+    // Certificate body text
+    ctx.fillStyle = '#2C1810';
+    ctx.font = '32px Georgia';
+    ctx.fillText('यह प्रमाणित किया जाता है कि', canvas.width / 2, 350);
+
+    // Student name with underline (prominent)
+    ctx.fillStyle = '#8B0000';
+    ctx.font = 'bold 52px Georgia';
+    ctx.fillText(studentName.trim(), canvas.width / 2, 420);
+
+    // Decorative underline for name
+    ctx.strokeStyle = '#8B0000';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    const nameWidth = ctx.measureText(studentName.trim()).width;
+    ctx.moveTo((canvas.width - nameWidth) / 2, 430);
+    ctx.lineTo((canvas.width + nameWidth) / 2, 430);
+    ctx.stroke();
 
     // Achievement details
-    ctx.fillStyle = '#3E2723';
-    ctx.font = '30px Arial';
-    ctx.fillText('ने सफलतापूर्वक पूरा किया', canvas.width / 2, 440);
+    ctx.fillStyle = '#2C1810';
+    ctx.font = '30px Georgia';
+    ctx.fillText('ने सफलतापूर्वक पूरा किया', canvas.width / 2, 485);
 
-    // Quiz details
+    // Subject/Topic (highlighted)
     ctx.fillStyle = '#FF6B35';
-    ctx.font = 'bold 35px Arial';
-    const subjectText = `कक्षा ${quizState.selectedClass} - ${getSubjectName(quizState.selectedSubject)}`;
-    ctx.fillText(subjectText, canvas.width / 2, 500);
+    ctx.font = 'bold 40px Georgia';
+    const subjectText = getSubjectName(quizState.selectedSubject);
+    ctx.fillText(subjectText, canvas.width / 2, 555);
 
-    // Score
-    ctx.fillStyle = '#388E3C';
-    ctx.font = 'bold 50px Arial';
-    ctx.fillText(`${percentage}% अंक प्राप्त किए`, canvas.width / 2, 580);
+    // Score with badge background
+    ctx.fillStyle = 'rgba(76, 175, 80, 0.15)';
+    ctx.fillRect(400, 590, 400, 70);
+    ctx.strokeStyle = '#4CAF50';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(400, 590, 400, 70);
 
-    // Date
+    ctx.fillStyle = '#2E7D32';
+    ctx.font = 'bold 48px Georgia';
+    ctx.fillText(`${percentage}% अंक`, canvas.width / 2, 640);
+
+    // Signature section with line
+    ctx.fillStyle = '#654321';
+    ctx.font = 'italic 55px Brush Script MT, cursive';
+    ctx.fillText('Pratap Kumar', 280, 760);
+
+    // Signature line
+    ctx.strokeStyle = '#000000';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(200, 770);
+    ctx.lineTo(450, 770);
+    ctx.stroke();
+
+    // Title below signature
+    ctx.font = '20px Georgia';
+    ctx.fillStyle = '#654321';
+    ctx.fillText('प्रमुख एवं संस्थापक', 280, 795);
+
+    // Date and Time section (right side)
+    ctx.font = '22px Georgia';
     ctx.fillStyle = '#5D4037';
-    ctx.font = '25px Arial';
-    const today = new Date().toLocaleDateString('hi-IN');
-    ctx.fillText(`तिथि: ${today}`, canvas.width / 2, 680);
+    ctx.textAlign = 'right';
+    ctx.fillText(`तिथि: ${downloadDate}`, canvas.width - 200, 745);
+    ctx.fillText(`समय: ${downloadTime}`, canvas.width - 200, 775);
 
-    // Footer
-    ctx.fillStyle = '#8D6E63';
-    ctx.font = 'italic 20px Arial';
-    ctx.fillText('🪔 पढ़ेगा बिहार, बनेगा लालटॉप! 🌟', canvas.width / 2, 740);
+    // Seal/Stamp placeholder (left side)
+    ctx.strokeStyle = '#B8860B';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.arc(920, 750, 40, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.fillStyle = '#DAA520';
+    ctx.font = 'bold 16px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('OFFICIAL', 920, 745);
+    ctx.fillText('SEAL', 920, 765);
+
+    // Footer motivational quote
+    ctx.fillStyle = '#8B7355';
+    ctx.font = 'italic 22px Georgia';
+    ctx.textAlign = 'center';
+    ctx.fillText('🪔 पढ़ेगा बिहार, बनेगा लालटॉप! 🌟', canvas.width / 2, 850);
 
     // Download certificate
     canvas.toBlob(blob => {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `certificate-class${quizState.selectedClass}-${quizState.selectedSubject}-${Date.now()}.png`;
+        a.download = `certificate-${quizState.selectedSubject}-${studentName.trim()}-${Date.now()}.png`;
         a.click();
         URL.revokeObjectURL(url);
     });
