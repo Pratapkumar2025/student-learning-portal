@@ -520,11 +520,22 @@ function shuffleArray(array) {
 function selectQuestionCount(count) {
     quizState.questionCount = count;
 
-    // Update button states
-    document.querySelectorAll('.count-btn').forEach(btn => {
-        btn.classList.remove('selected');
-    });
-    event.target.classList.add('selected');
+    // Update button states - find all option-cards in question count section
+    const questionCountSection = document.getElementById('questionCountSelection');
+    if (questionCountSection) {
+        questionCountSection.querySelectorAll('.option-card').forEach(card => {
+            card.classList.remove('selected');
+        });
+    }
+
+    // Add selected class to the clicked card (handle clicks on child elements)
+    let targetCard = event.target;
+    if (!targetCard.classList.contains('option-card')) {
+        targetCard = targetCard.closest('.option-card');
+    }
+    if (targetCard) {
+        targetCard.classList.add('selected');
+    }
 
     // Auto-start the quiz after a brief moment for visual feedback
     setTimeout(() => {
@@ -551,6 +562,30 @@ function resetQuiz() {
         timerInterval: null,
         score: { correct: 0, wrong: 0, skipped: 0 }
     };
+}
+
+function goToHome() {
+    if (confirm('क्या आप क्विज छोड़ना चाहते हैं?')) {
+        resetQuiz();
+    }
+}
+
+function retryQuiz() {
+    // Restart the same quiz with same subject and question count
+    quizState.currentQuestionIndex = 0;
+    quizState.answers = new Array(quizState.questions.length).fill(null);
+    quizState.score = { correct: 0, wrong: 0, skipped: 0 };
+
+    // Hide results, show quiz interface
+    document.getElementById('quizResults').classList.add('hidden');
+    document.getElementById('quizInterface').classList.remove('hidden');
+
+    // Reload first question
+    loadQuestion();
+
+    // Restart timer
+    quizState.startTime = Date.now();
+    startTimer();
 }
 
 console.log('✅ Subject-Wise Quiz System Loaded! Mixed Difficulty: Easy → Medium → Hard');
