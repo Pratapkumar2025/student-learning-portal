@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Testing Page - Hamar Padhai</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .status {
+            text-align: center;
+            padding: 1rem;
+            background: #f0f0f0;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .test-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+        }
+
+        .test-section h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .test-button {
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .test-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .test-button:active {
+            transform: translateY(0);
+        }
+
+        .test-button.success {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        }
+
+        .test-button.error {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        }
+
+        .console-output {
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .console-output p {
+            margin: 0.3rem 0;
+        }
+
+        .instructions {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .instructions h3 {
+            color: #856404;
+            margin-bottom: 0.5rem;
+        }
+
+        .instructions p {
+            color: #856404;
+            margin: 0.3rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Button Testing Page</h1>
+        <div class="status" id="overallStatus">
+            <strong>Status:</strong> Ready to test
+        </div>
+
+        <div class="instructions">
+            <h3>📋 Testing Instructions:</h3>
+            <p>1. Click each button below</p>
+            <p>2. Green button = Function works ✅</p>
+            <p>3. Red button = Function missing ❌</p>
+            <p>4. Check console output at the bottom</p>
+        </div>
+
+        <!-- Critical Functions -->
+        <div class="test-section">
+            <h2>🔴 Critical Functions (Previously Broken)</h2>
+            <div class="button-grid">
+                <button class="test-button" onclick="testFunction('toggleDarkMode')">
+                    🌙 Dark Mode
+                </button>
+                <button class="test-button" onclick="testFunction('scrollToQuiz')">
+                    🚀 Scroll to Quiz
+                </button>
+                <button class="test-button" onclick="testFunction('refreshQuote')">
+                    💡 Refresh Quote
+                </button>
+                <button class="test-button" onclick="testFunction('skipQuestion')">
+                    ⏭️ Skip Question
+                </button>
+                <button class="test-button" onclick="testFunction('downloadCertificate')">
+                    📜 Download Certificate
+                </button>
+                <button class="test-button" onclick="testFunction('openStudyMaterial', '5-6')">
+                    📚 Study Material
+                </button>
+                <button class="test-button" onclick="testFunction('switchLeaderboardTab', 'today')">
+                    🏆 Leaderboard Tab
+                </button>
+                <button class="test-button" onclick="testFunction('submitUserComment')">
+                    💬 Submit Comment
+                </button>
+                <button class="test-button" onclick="testFunction('showGalleryCategory', 'indian')">
+                    🌟 Gallery Tabs
+                </button>
+                <button class="test-button" onclick="testFunction('showComputerCategory', 'intro')">
+                    💻 Computer Tabs
+                </button>
+            </div>
+        </div>
+
+        <!-- Console Output -->
+        <div class="test-section">
+            <h2>📊 Console Output</h2>
+            <div class="console-output" id="consoleOutput">
+                <p>> Ready to test... Click buttons above</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem; color: #666;">
+            <p>🔗 <a href="index.html" style="color: #667eea;">Back to Main Site</a></p>
+        </div>
+    </div>
+
+    <!-- Load all scripts -->
+    <script src="script.js"></script>
+    <script src="quiz-system-new.js"></script>
+    <script src="quiz-functions-complete.js"></script>
+    <script src="script-tabbed-navigation.js"></script>
+    <script src="script-enhancements.js"></script>
+
+    <script>
+        let testsRun = 0;
+        let testsPassed = 0;
+        let testsFailed = 0;
+
+        function logToConsole(message, type = 'info') {
+            const consoleOutput = document.getElementById('consoleOutput');
+            const timestamp = new Date().toLocaleTimeString();
+            const color = type === 'success' ? '#00ff00' : type === 'error' ? '#ff5555' : '#00ff00';
+            const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : '➤';
+
+            const p = document.createElement('p');
+            p.style.color = color;
+            p.textContent = `[${timestamp}] ${icon} ${message}`;
+            consoleOutput.appendChild(p);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+
+        function updateStatus() {
+            const statusDiv = document.getElementById('overallStatus');
+            const total = testsRun;
+            const passed = testsPassed;
+            const failed = testsFailed;
+
+            if (total === 0) {
+                statusDiv.className = 'status';
+                statusDiv.innerHTML = '<strong>Status:</strong> Ready to test';
+            } else if (failed === 0) {
+                statusDiv.className = 'status success';
+                statusDiv.innerHTML = `<strong>✅ ALL TESTS PASSED!</strong> ${passed}/${total} functions working`;
+            } else {
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = `<strong>⚠️ SOME TESTS FAILED</strong> Passed: ${passed}/${total} | Failed: ${failed}`;
+            }
+        }
+
+        function testFunction(functionName, ...args) {
+            testsRun++;
+            const button = event.target;
+
+            try {
+                // Check if function exists
+                if (typeof window[functionName] === 'function') {
+                    // Try to call it
+                    window[functionName](...args);
+
+                    // Success
+                    testsPassed++;
+                    button.classList.add('success');
+                    logToConsole(`${functionName}() - PASSED ✅`, 'success');
+                } else {
+                    // Function doesn't exist
+                    testsFailed++;
+                    button.classList.add('error');
+                    logToConsole(`${functionName}() - FAILED (not defined) ❌`, 'error');
+                }
+            } catch (error) {
+                // Function exists but threw error
+                testsFailed++;
+                button.classList.add('error');
+                logToConsole(`${functionName}() - ERROR: ${error.message} ❌`, 'error');
+            }
+
+            updateStatus();
+        }
+
+        // Log initial state
+        logToConsole('Testing page loaded successfully', 'success');
+        logToConsole('All scripts loaded. Ready to test!', 'info');
+    </script>
+</body>
+</html>

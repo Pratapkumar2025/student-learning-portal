@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="बिहार के छात्रों के लिए विज्ञान क्विज़ और अध्ययन सामग्री - कक्षा 5 से 10 तक NCERT">
+    <title>हमार पढ़ाई - बिहार के होनहार छात्र का अड्डा</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;600;700&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-tabbed-navigation.css">
+</head>
+<body>
+
+    <!-- ========================================
+         FIXED HEADER - Always Visible
+         ======================================== -->
+    <header class="main-header">
+        <div class="container">
+            <!-- Logo -->
+            <div class="logo-section">
+                <div class="diya-icon">🪔</div>
+                <div class="brand-text">
+                    <h1 class="site-title">हमार पढ़ाई</h1>
+                    <p class="tagline">जे पढ़तई, उहे गढ़तई! 🌟</p>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="main-nav">
+                <!-- Mobile Hamburger -->
+                <button class="nav-toggle" onclick="HamarPadhaiNav.toggleMobileMenu()" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <!-- Navigation Menu -->
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link active">🏠 होम</a></li>
+                    <li><a href="#quiz" class="nav-link">📚 क्विज़</a></li>
+                    <li><a href="#study" class="nav-link">📖 अध्ययन</a></li>
+                    <li><a href="#gallery" class="nav-link">🌟 गैलरी</a></li>
+                    <li><a href="#stats" class="nav-link">📊 आंकड़े</a></li>
+                    <li><a href="#stories" class="nav-link">📖 कहानी</a></li>
+                    <li><a href="#feedback" class="nav-link">💬 राय</a></li>
+                </ul>
+
+                <!-- Dark Mode Toggle -->
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">
+                    <span id="darkModeIcon">🌙</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-title">भौकाल टाइट, भविष्य ब्राइट! 🙏</h2>
+                <p class="hero-subtitle">NCERT विज्ञान (कक्षा 5-10) की मुफ्त ऑनलाइन क्विज़ और अध्ययन सामग्री</p>
+                <p class="hero-wisdom">पढ़ाई से बदलऽ अपन किस्मत, बिहार के हर बच्चा बनी जननायक! 💪✨</p>
+                <button class="cta-button" onclick="scrollToQuiz()">
+                    भिड़ जा! 🚀
+                </button>
+            </div>
+            <!-- Daily Motivational Quote Banner -->
+            <div class="daily-quote-card" id="dailyQuote" style="max-width: 900px; margin: 2rem auto 0; padding: 1.5rem 2rem; border-radius: 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;">
+                    <div class="quote-icon" style="font-size: 2rem; flex-shrink: 0;">💡</div>
+                    <div style="flex: 1; min-width: 250px;">
+                        <p class="quote-text-main" id="quoteText" style="font-size: 1.1rem; font-weight: 600; color: #fff; margin: 0 0 0.3rem 0; line-height: 1.4;">तनी साबर करीं...</p>
+                        <p class="quote-text-english" id="quoteTextEnglish" style="font-size: 0.9rem; color: rgba(255,255,255,0.9); margin: 0 0 0.3rem 0; font-style: italic;"></p>
+                        <p class="quote-author-name" id="quoteAuthor" style="font-size: 0.85rem; color: rgba(255,255,255,0.8); margin: 0; font-weight: 500;"></p>
+                    </div>
+                    <button class="quote-refresh-btn" onclick="refreshQuote()" style="padding: 0.6rem 1.2rem; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s; white-space: nowrap; backdrop-filter: blur(10px);">🔄 नया उद्धरण</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Quiz Section -->
+    <section id="quiz" class="quiz-section">
+        <div class="container">
+            <h2 class="section-title">विज्ञान क्विज़ 📚</h2>
+            <p class="section-subtitle">कमर कस लऽ! अपने विषय चुनें और टेस्ट शुरू करें</p>
+            <p class="section-tagline">जे टिकत, उहे दिखत! 💪 | सरल से कठिन - सब कुछ मिला के! 🎯</p>
+
+            <!-- Subject Selection (DIRECT - No Class Selection) -->
+            <div class="subject-selection" id="subjectSelection">
+                <h3 class="selection-title">📖 अपना विषय चुनें</h3>
+                <p class="selection-description">सभी स्तर के प्रश्न (आसान, मध्यम, कठिन) एक साथ मिले हुए!</p>
+                <div class="subject-grid">
+                    <button class="subject-card" onclick="selectSubject('physics')">
+                        <span class="subject-icon">⚛️</span>
+                        <span class="subject-name">भौतिक विज्ञान</span>
+                    </button>
+                    <button class="subject-card" onclick="selectSubject('chemistry')">
+                        <span class="subject-icon">🧪</span>
+                        <span class="subject-name">रसायन विज्ञान</span>
+                    </button>
+                    <button class="subject-card" onclick="selectSubject('biology')">
+                        <span class="subject-icon">🌱</span>
+                        <span class="subject-name">जीव विज्ञान</span>
+                    </button>
+                    <button class="subject-card" onclick="selectSubject('general')">
+                        <span class="subject-icon">🔬</span>
+                        <span class="subject-name">सामान्य विज्ञान</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question Count Selection -->
+            <div class="quiz-customization hidden" id="questionCountSelection">
+                <button class="back-button" onclick="backToSubjectSelection()">← पिछुलका पे चल</button>
+                <div class="quiz-customization-card">
+                    <h3 class="customization-title"><span id="selectedSubjectName">विज्ञान</span> - कतना सवाल लड़ाई करबऽ? 🤔</h3>
+                    <p class="difficulty-info">⚡ आसान → 📚 मध्यम → 🔥 कठिन (मिक्स्ड)</p>
+                    <div class="customization-options">
+                        <div class="option-card" onclick="selectQuestionCount(10)">
+                            <div>
+                                <div class="option-label">10 प्रश्न</div>
+                                <div class="option-description">त्वरित अभ्यास के लिए</div>
+                            </div>
+                            <span>⚡</span>
+                        </div>
+                        <div class="option-card" onclick="selectQuestionCount(20)">
+                            <div>
+                                <div class="option-label">20 प्रश्न</div>
+                                <div class="option-description">मध्यम अभ्यास</div>
+                            </div>
+                            <span>📚</span>
+                        </div>
+                        <div class="option-card" onclick="selectQuestionCount(30)">
+                            <div>
+                                <div class="option-label">30 प्रश्न</div>
+                                <div class="option-description">गहन अध्ययन</div>
+                            </div>
+                            <span>🎯</span>
+                        </div>
+                    </div>
+                    <!-- Auto-start enabled: Quiz starts automatically after selecting question count -->
+                    <button class="start-quiz-btn hidden" onclick="startSubjectQuiz()">
+                        भिड़ जा! 🚀 Quiz शुरू करें
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Interface -->
+            <div class="quiz-interface hidden" id="quizInterface">
+                <!-- Persistent Quiz Navigation -->
+                <div class="quiz-persistent-nav">
+                    <div class="quiz-nav-buttons">
+                        <button class="quiz-nav-btn" onclick="previousQuestion()" id="prevBtn" disabled>
+                            पिछुलका पे चल!
+                        </button>
+                        <button class="quiz-nav-btn primary" onclick="goToHome()">
+                            🏠 भाग चल घर!
+                        </button>
+                    </div>
+                    <div class="quiz-progress-info">
+                        <span id="currentQuestion">1</span> / <span id="totalQuestions">10</span> प्रश्न
+                    </div>
+                    <div class="quiz-timer">
+                        <span class="timer-icon">⏱️</span>
+                        <span class="timer-text" id="timerDisplay">00:00</span>
+                    </div>
+                </div>
+
+                <div class="quiz-header">
+                    <div class="quiz-info">
+                        <span class="quiz-class">कक्षा: <strong id="selectedClass">-</strong></span>
+                        <span class="quiz-subject">विषय: <strong id="selectedSubject">-</strong></span>
+                    </div>
+                </div>
+
+                <div class="quiz-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <h3 class="question-text" id="questionText" style="flex: 1; margin: 0;">प्रश्न यहाँ दिखेगा...</h3>
+                        <span class="difficulty-badge" id="difficultyBadge" style="font-size: 0.9rem; padding: 0.3rem 0.8rem; border-radius: 20px; background: var(--primary-saffron); color: white; white-space: nowrap; margin-left: 1rem;">⚡ आसान</span>
+                    </div>
+                    <div class="options-container" id="optionsContainer">
+                        <!-- Options will be inserted here by JavaScript -->
+                    </div>
+                    <div class="explanation-box hidden" id="explanationBox">
+                        <h4 class="explanation-title">व्याख्या:</h4>
+                        <p class="explanation-text" id="explanationText"></p>
+                    </div>
+                </div>
+
+                <div class="quiz-controls">
+                    <button class="quiz-button secondary" onclick="skipQuestion()" id="skipBtn">माफ करीं गुरु! 🙏</button>
+                    <button class="quiz-button primary" onclick="nextQuestion()" id="nextBtn" disabled>चल गुरु, आगे!</button>
+                    <button class="quiz-button primary hidden" onclick="submitQuiz()" id="submitBtn">Submit करें! 🎯</button>
+                </div>
+            </div>
+
+            <!-- Quiz Results -->
+            <div class="quiz-results hidden" id="quizResults">
+                <div class="results-card">
+                    <div class="results-icon">🎉</div>
+                    <h3 class="results-title">जिया हो बिहार के लाला!</h3>
+                    <div class="score-display">
+                        <div class="score-circle">
+                            <span class="score-value" id="scoreValue">0</span>
+                            <span class="score-total">/ <span id="totalScore">10</span></span>
+                        </div>
+                        <p class="score-percentage" id="scorePercentage">0%</p>
+                    </div>
+                    <div class="results-stats">
+                        <div class="result-stat correct">
+                            <span class="stat-icon">✓</span>
+                            <span class="stat-value" id="correctAnswers">0</span>
+                            <span class="stat-label">सही</span>
+                        </div>
+                        <div class="result-stat wrong">
+                            <span class="stat-icon">✗</span>
+                            <span class="stat-value" id="wrongAnswers">0</span>
+                            <span class="stat-label">गलत</span>
+                        </div>
+                        <div class="result-stat skipped">
+                            <span class="stat-icon">⊘</span>
+                            <span class="stat-value" id="skippedAnswers">0</span>
+                            <span class="stat-label">छोड़े गए</span>
+                        </div>
+                    </div>
+                    <div class="results-time">
+                        <span class="time-icon">⏱️</span>
+                        <span>समय: <strong id="timeTaken">00:00</strong></span>
+                    </div>
+                    <div class="results-actions">
+                        <button class="results-button primary" onclick="downloadCertificate()">
+                            📜 सर्टिफिकेट डाउनलोड करें
+                        </button>
+                        <button class="results-button secondary" onclick="retryQuiz()">
+                            🔄 फिर से रगड़!
+                        </button>
+                        <button class="results-button tertiary" onclick="resetQuiz()">
+                            🏠 भाग चल घर!
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Study Materials Section -->
+    <section id="study" class="study-section">
+        <div class="container">
+            <h2 class="section-title">अध्ययन सामग्री 📖</h2>
+            <p class="section-subtitle">कक्षावार NCERT विज्ञान नोट्स और टॉपिक</p>
+            <p class="study-tagline">दिमाग के बत्ती जला! 💡</p>
+
+            <div class="study-grid">
+                <div class="study-card">
+                    <div class="study-icon">📘</div>
+                    <h3 class="study-title">कक्षा 5-6</h3>
+                    <ul class="study-topics">
+                        <li>पौधों का अध्ययन</li>
+                        <li>जल और जीवन</li>
+                        <li>ऊर्जा के स्रोत</li>
+                        <li>प्रकाश और ध्वनि</li>
+                    </ul>
+                    <button class="study-button" onclick="openStudyMaterial('5-6')">अध्ययन करें</button>
+                </div>
+
+                <div class="study-card">
+                    <div class="study-icon">📗</div>
+                    <h3 class="study-title">कक्षा 7-8</h3>
+                    <ul class="study-topics">
+                        <li>रासायनिक प्रतिक्रियाएं</li>
+                        <li>कोशिका संरचना</li>
+                        <li>गति और बल</li>
+                        <li>विद्युत धारा</li>
+                    </ul>
+                    <button class="study-button" onclick="openStudyMaterial('7-8')">अध्ययन करें</button>
+                </div>
+
+                <div class="study-card">
+                    <div class="study-icon">📕</div>
+                    <h3 class="study-title">कक्षा 9-10</h3>
+                    <ul class="study-topics">
+                        <li>न्यूटन के नियम</li>
+                        <li>रासायनिक समीकरण</li>
+                        <li>आनुवंशिकी</li>
+                        <li>ऊर्जा संरक्षण</li>
+                    </ul>
+                    <button class="study-button" onclick="openStudyMaterial('9-10')">अध्ययन करें</button>
+                </div>
+            </div>
+        </div>
+    </section>
+

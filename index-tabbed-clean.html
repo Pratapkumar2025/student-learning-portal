@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="बिहार के छात्रों के लिए विज्ञान क्विज़ और अध्ययन सामग्री - कक्षा 5 से 10 तक NCERT">
+    <title>हमार पढ़ाई - बिहार के होनहार छात्र का अड्डा</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;600;700&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-tabbed-navigation.css">
+</head>
+<body>
+
+    <!-- ========================================
+         FIXED HEADER - Always Visible
+         ======================================== -->
+    <header class="main-header">
+        <div class="container">
+            <!-- Logo -->
+            <div class="logo-section">
+                <div class="diya-icon">🪔</div>
+                <div class="brand-text">
+                    <h1 class="site-title">हमार पढ़ाई</h1>
+                    <p class="tagline">जे पढ़तई, उहे गढ़तई! 🌟</p>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="main-nav">
+                <!-- Mobile Hamburger -->
+                <button class="nav-toggle" onclick="HamarPadhaiNav.toggleMobileMenu()" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <!-- Navigation Menu -->
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link active">🏠 घर</a></li>
+                    <li><a href="#quiz" class="nav-link">📚 क्विज़</a></li>
+                    <li><a href="#study" class="nav-link">📖 पढ़ाई</a></li>
+                    <li><a href="#gallery" class="nav-link">🌟 गैलरी</a></li>
+                    <li><a href="#stories" class="nav-link">📖 कहानियाँ</a></li>
+                    <li><a href="#puzzles" class="nav-link">🤔 पहेलियाँ</a></li>
+                    <li><a href="#computer" class="nav-link">💻 कंप्यूटर</a></li>
+                    <li><a href="#downloads" class="nav-link">📥 डाउनलोड</a></li>
+                    <li><a href="#leaderboard" class="nav-link">🏆 बोर्ड</a></li>
+                    <li><a href="#progress" class="nav-link">📊 प्रगति</a></li>
+                </ul>
+
+                <!-- Dark Mode Toggle -->
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">
+                    <span id="darkModeIcon">🌙</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========================================
+         CONTENT AREA - Sections Switch Here
+         ======================================== -->
+    <div class="content-area">
+
+        <!-- ========================================
+             HOME SECTION - Clean Navigation Dashboard
+             ======================================== -->
+        <section id="home" class="hero-section active">
+            <div class="hero-content">
+                <h2 class="hero-title">भौकाल टाइट, भविष्य ब्राइट! 🙏</h2>
+                <p class="hero-subtitle">NCERT विज्ञान (कक्षा 5-10) की मुफ्त ऑनलाइन क्विज़ और अध्ययन सामग्री</p>
+                <p class="hero-wisdom">पढ़ाई चांप के, नौकरी लांप के! 💼🚀</p>
+
+                <!-- Navigation Cards -->
+                <div class="quick-stats">
+                    <!-- Quiz Card -->
+                    <div class="stat-card" onclick="HamarPadhaiNav.showSection('quiz')">
+                        <div class="stat-icon">📚</div>
+                        <div class="stat-value">500+</div>
+                        <div class="stat-label">विज्ञान क्विज़</div>
+                        <div class="stat-description">NCERT आधारित प्रश्न</div>
+                    </div>
+
+                    <!-- Study Materials Card -->
+                    <div class="stat-card" onclick="HamarPadhaiNav.showSection('study')">
+                        <div class="stat-icon">📖</div>
+                        <div class="stat-value">50+</div>
+                        <div class="stat-label">अध्ययन सामग्री</div>
+                        <div class="stat-description">दिमाग के बत्ती जला!</div>
+                    </div>
+
+                    <!-- Gallery Card -->
+                    <div class="stat-card" onclick="HamarPadhaiNav.showSection('gallery')">
+                        <div class="stat-icon">🌟</div>
+                        <div class="stat-value">50+</div>
+                        <div class="stat-label">महान व्यक्तित्व</div>
+                        <div class="stat-description">विश्व को बदलने वाले महापुरुष</div>
+                    </div>
+
+                    <!-- Stories Card -->
+                    <div class="stat-card" onclick="HamarPadhaiNav.showSection('stories')">
+                        <div class="stat-icon">📖</div>
+                        <div class="stat-value">10+</div>
+                        <div class="stat-label">हिंदी कहानियाँ</div>
+                        <div class="stat-description">तनी रुकिये न जी!</div>
+                    </div>
+
+                    <!-- Puzzles Card -->
+                    <div class="stat-card" onclick="HamarPadhaiNav.showSection('puzzles')">
+                        <div class="stat-icon">🤔</div>
+                        <div class="stat-value">15+</div>
+                        <div class="stat-label">देसी पहेलियाँ</div>
+                        <div class="stat-description">बुझाइल की ना?</div>
+                    </div>
+
+                    <!-- Computer Education Card -->
+                    <div class="stat-card" onclick="HamarPadhaiNav.showSection('computer')">
+                        <div class="stat-icon">💻</div>
+                        <div class="stat-value">5</div>
+                        <div class="stat-label">कंप्यूटर शिक्षा</div>
+                        <div class="stat-description">बेसिक से एडवांस</div>
+                    </div>
+
+                    <!-- Downloads Card -->
+                    <div class="stat-card" onclick="HamarPadhaiNav.showSection('downloads')">
+                        <div class="stat-icon">📥</div>
+                        <div class="stat-value">100+</div>
+                        <div class="stat-label">मुफ्त डाउनलोड</div>
+                        <div class="stat-description">PDFs, eBooks, Notes</div>
+                    </div>
+
+                    <!-- Leaderboard Card -->
+                    <div class="stat-card" onclick="HamarPadhaiNav.showSection('leaderboard')">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-value">Top</div>
+                        <div class="stat-label">लीडरबोर्ड</div>
+                        <div class="stat-description">लल्लन-टॉप स्टूडेंट्स!</div>
+                    </div>
+
+                    <!-- Progress Card -->
+                    <div class="stat-card" onclick="HamarPadhaiNav.showSection('progress')">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-value">Track</div>
+                        <div class="stat-label">प्रगति ट्रैकिंग</div>
+                        <div class="stat-description">करत-करत अभ्यास के</div>
+                    </div>
+                </div>
+
+                <!-- Quick Info -->
+                <div class="home-info">
+                    <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">
+                        ⚡ ऊपर किसी भी कार्ड पे क्लिक करें | Click any card above to explore
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================
+             QUIZ SECTION - Full Quiz Interface
+             ======================================== -->
+        <section id="quiz" class="quiz-section">
+            <div class="container">
+                <h2 class="section-title">📚 विज्ञान क्विज़</h2>
+                <p class="section-subtitle">कमर कस लऽ! जे टिकत, उहे दिखत! 💪</p>
+
+                <!-- Your existing quiz content will go here -->
+                <div class="section-placeholder">
+                    <p>🚧 Quiz interface from your existing code will be inserted here</p>
+                    <p>Include: Subject selection, question count, quiz interface, results</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================
+             STUDY SECTION - Study Materials
+             ======================================== -->
+        <section id="study" class="study-section">
+            <div class="container">
+                <h2 class="section-title">📖 अध्ययन सामग्री</h2>
+                <p class="section-subtitle">दिमाग के बत्ती जला! 💡</p>
+
+                <div class="section-placeholder">
+                    <p>🚧 Study materials from your existing code will be inserted here</p>
+                    <p>Include: Class-wise topics, subject cards, study grids</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================
+             GALLERY SECTION - Great Personalities
+             ======================================== -->
+        <section id="gallery" class="gallery-section">
+            <div class="container">
+                <h2 class="section-title">🌟 हमारी गैलरी - महान व्यक्तित्व</h2>
+                <p class="section-subtitle">विश्व को बदलने वाले महापुरुषों की प्रेरणादायक गैलरी</p>
+                <p class="section-tagline">ई माटी में बारूद बा! 💪</p>
+
+                <div class="section-placeholder">
+                    <p>🚧 Gallery from your existing code will be inserted here</p>
+                    <p>Include: Indian personalities, World leaders, Scientists</p>
+                    <p>Format: Tabs for categories, personality cards with images & bios</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================
+             STORIES SECTION - Hindi Stories
+             ======================================== -->
+        <section id="stories" class="stories-section">
+            <div class="container">
+                <h2 class="section-title">📖 हिंदी कहानियाँ</h2>
+                <p class="section-subtitle">तनी रुकिये न जी, कहानी सुनीं! 🙏</p>
+
+                <div class="section-placeholder">
+                    <p>🚧 Stories from your existing code will be inserted here</p>
+                    <p>Include: Panchatantra stories, story cards, read more functionality</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================
+             PUZZLES SECTION - Hindi Riddles
+             ======================================== -->
+        <section id="puzzles" class="puzzles-section">
+            <div class="container">
+                <h2 class="section-title">🤔 देसी पहेलियाँ - भुझो तो जानो!</h2>
+                <p class="section-subtitle">बुझाइल की ना? दिमाग चला के देखव! 🧠</p>
+
+                <div class="section-placeholder">
+                    <p>🚧 Puzzles from your existing code will be inserted here</p>
+                    <p>Include: Puzzle cards, show/hide answers, puzzle grid</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================
+             COMPUTER SECTION - Basic Computer Education
+             ======================================== -->
+        <section id="computer" class="computer-section">
+            <div class="container">
+                <h2 class="section-title">💻 बेसिक कंप्यूटर शिक्षा</h2>
+                <p class="section-subtitle">गाँव के लोगन के लिए कंप्यूटर सीखो! 🖥️</p>
+
+                <div class="section-placeholder">
+                    <p>🚧 Computer education from your existing code will be inserted here</p>
+                    <p>Include: Introduction, Parts, Basics, Internet, Tips tabs</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================
+             DOWNLOADS SECTION - Free Resources
+             ======================================== -->
+        <section id="downloads" class="downloads-section">
+            <div class="container">
+                <h2 class="section-title">📥 मुफ्त डाउनलोड सेंटर</h2>
+                <p class="section-subtitle">PDFs, eBooks, Study Notes और बहुत कुछ! 📚</p>
+
+                <div class="section-placeholder">
+                    <p>🚧 Downloads from your existing code will be inserted here</p>
+                    <p>Include: Category tabs, download cards, coming soon section</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================
+             LEADERBOARD SECTION
+             ======================================== -->
+        <section id="leaderboard" class="leaderboard-section">
+            <div class="container">
+                <h2 class="section-title">🏆 लीडरबोर्ड</h2>
+                <p class="section-subtitle">लल्लन-टॉप स्टूडेंट्स! तोहर कोई जोड़ नइखे! 💪</p>
+
+                <div class="section-placeholder">
+                    <p>🚧 Leaderboard from your existing code will be inserted here</p>
+                    <p>Include: Daily, Weekly, All-time tabs, rank table</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================
+             PROGRESS SECTION
+             ======================================== -->
+        <section id="progress" class="progress-section">
+            <div class="container">
+                <h2 class="section-title">📊 प्रगति ट्रैकिंग</h2>
+                <p class="section-subtitle">करत-करत अभ्यास के, जड़मति होत सुजान! 📈</p>
+
+                <div class="section-placeholder">
+                    <p>🚧 Progress tracking from your existing code will be inserted here</p>
+                    <p>Include: Stats, streak counter, subject progress, time spent</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 हमार पढ़ाई | Created with ❤️ by Pratap Kumar</p>
+            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.7;">
+                Email: TUMSENAHOPAYEGABE@GMAIL.COM | YouTube: @Pratap91
+            </p>
+        </div>
+    </footer>
+
+    <!-- ========================================
+         SCRIPTS
+         ======================================== -->
+    <script src="script.js"></script>
+    <script src="quiz-system-new.js"></script>
+    <script src="script-tabbed-navigation.js"></script>
+
+    <style>
+        /* Additional styles for placeholder sections */
+        .section-placeholder {
+            background: rgba(255, 107, 53, 0.05);
+            border: 2px dashed #FF6B35;
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .section-placeholder p {
+            font-size: 1rem;
+            margin: 0.5rem 0;
+            color: #FF6B35;
+            font-weight: 600;
+        }
+
+        .section-tagline {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #FFC107;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .stat-description {
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+            opacity: 0.8;
+        }
+
+        .home-info {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        /* Quick Stats Grid Enhancement */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .quick-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+
+            .stat-card {
+                padding: 1rem !important;
+            }
+
+            .stat-icon {
+                font-size: 2rem !important;
+            }
+
+            .stat-value {
+                font-size: 1.25rem !important;
+            }
+
+            .stat-label {
+                font-size: 0.85rem !important;
+            }
+
+            .stat-description {
+                font-size: 0.7rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .quick-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+</body>
+</html>

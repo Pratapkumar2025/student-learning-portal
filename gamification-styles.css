@@ -1,0 +1,601 @@
+/*
+ * हमार पढ़ाई - Gamification Styles & Animations
+ * Points, Badges, Leaderboard, Streaks, Challenges
+ */
+
+/* ===== ANIMATIONS ===== */
+
+/* Points Feedback Animation */
+@keyframes pointsFeedback {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.8);
+    }
+    20% {
+        opacity: 1;
+        transform: translateY(-10px) scale(1.1);
+    }
+    80% {
+        opacity: 1;
+        transform: translateY(-30px) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+}
+
+/* Correct Answer Animation */
+@keyframes answerCorrect {
+    0%, 100% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.05);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    75% {
+        transform: scale(1.05);
+    }
+}
+
+.answer-correct-animation {
+    animation: answerCorrect 0.6s ease;
+    background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%) !important;
+    color: white !important;
+    border-color: #4CAF50 !important;
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.6) !important;
+}
+
+/* Wrong Answer Animation */
+@keyframes answerWrong {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+.answer-wrong-animation {
+    animation: answerWrong 0.6s ease;
+    background: linear-gradient(135deg, #F44336 0%, #E91E63 100%) !important;
+    color: white !important;
+    border-color: #F44336 !important;
+    box-shadow: 0 0 20px rgba(244, 67, 54, 0.6) !important;
+}
+
+/* Quiz Completion Celebration */
+@keyframes celebration {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+@keyframes celebrationPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 30px 15px rgba(255, 193, 7, 0);
+    }
+}
+
+.celebration-animation {
+    animation: celebration 1s ease, celebrationPulse 1s ease;
+}
+
+/* Badge Unlock Modal */
+.badge-unlock-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+    padding: 1rem;
+}
+
+.badge-unlock-content {
+    background: linear-gradient(135deg, var(--primary-saffron) 0%, var(--gold) 100%);
+    padding: 2rem;
+    border-radius: var(--radius-xl);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: var(--shadow-xl);
+    animation: scaleIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.badge-unlock-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    animation: bounce 0.6s ease infinite alternate;
+}
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+}
+
+.badge-unlock-title {
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.badge-unlock-name {
+    font-size: 1.4rem;
+    color: white;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.badge-unlock-desc {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1.5rem;
+}
+
+.badge-unlock-close {
+    background: white;
+    color: var(--primary-saffron);
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: var(--radius-full);
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.badge-unlock-close:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== GAMIFICATION UI COMPONENTS ===== */
+
+/* Points Counter */
+.points-display {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-md);
+    font-weight: 700;
+    color: white;
+    position: relative;
+}
+
+.points-icon {
+    font-size: 1.5rem;
+}
+
+.points-counter {
+    font-size: 1.3rem;
+}
+
+/* Streak Display */
+.streak-display {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #FF5722 0%, #FF9800 100%);
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-md);
+    font-weight: 700;
+    color: white;
+}
+
+.streak-icon {
+    font-size: 1.5rem;
+    animation: flicker 1.5s ease infinite;
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+.streak-count {
+    font-size: 1.3rem;
+}
+
+/* Sound Toggle Button */
+#soundToggle {
+    background: var(--bg-card);
+    border: 2px solid var(--primary-saffron);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-sm);
+}
+
+#soundToggle:hover {
+    background: var(--primary-saffron);
+    transform: scale(1.1);
+    box-shadow: var(--shadow-md);
+}
+
+/* Badge Grid */
+#badgeGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+.badge-card {
+    background: var(--bg-card);
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    transition: all var(--transition-base);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.badge-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-saffron) 0%, var(--gold) 100%);
+    transform: scaleX(0);
+    transition: transform var(--transition-base);
+}
+
+.badge-card.unlocked {
+    border-color: var(--gold);
+    box-shadow: var(--shadow-md);
+}
+
+.badge-card.unlocked::before {
+    transform: scaleX(1);
+}
+
+.badge-card.locked {
+    opacity: 0.5;
+    filter: grayscale(1);
+}
+
+.badge-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.badge-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-sm);
+}
+
+.badge-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+}
+
+.badge-description {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+}
+
+.badge-status {
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.3rem 0.8rem;
+    border-radius: var(--radius-full);
+    display: inline-block;
+}
+
+.badge-card.unlocked .badge-status {
+    background: var(--success);
+    color: white;
+}
+
+.badge-card.locked .badge-status {
+    background: var(--bg-secondary);
+    color: var(--text-light);
+}
+
+/* Leaderboard Table */
+#leaderboardBody {
+    width: 100%;
+}
+
+#leaderboardBody tr {
+    transition: all var(--transition-fast);
+}
+
+#leaderboardBody tr:hover {
+    background: var(--bg-secondary);
+    transform: translateX(3px);
+}
+
+#leaderboardBody tr.current-user {
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 193, 7, 0.1) 100%);
+    border-left: 4px solid var(--primary-saffron);
+    font-weight: 700;
+}
+
+#leaderboardBody tr.separator {
+    border-top: 2px dashed var(--text-light);
+    margin-top: var(--space-sm);
+}
+
+.rank-cell {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
+    padding: var(--space-sm);
+}
+
+.name-cell {
+    padding: var(--space-sm);
+    font-weight: 600;
+}
+
+.points-cell {
+    padding: var(--space-sm);
+    text-align: right;
+    color: var(--gold-dark);
+    font-weight: 700;
+}
+
+/* Challenge Cards */
+#challengesContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+}
+
+.challenge-card {
+    background: var(--bg-card);
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-base);
+    border-left: 4px solid var(--primary-saffron);
+    position: relative;
+    overflow: hidden;
+}
+
+.challenge-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+.challenge-card.completed {
+    border-left-color: var(--success);
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(139, 195, 74, 0.1) 100%);
+}
+
+.challenge-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.challenge-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.challenge-info {
+    flex: 1;
+}
+
+.challenge-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+}
+
+.challenge-type {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.challenge-reward {
+    background: var(--gold);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--radius-full);
+    font-size: 0.9rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.challenge-progress {
+    margin-top: var(--space-md);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: var(--space-xs);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-saffron) 0%, var(--gold) 100%);
+    border-radius: var(--radius-full);
+    transition: width var(--transition-slow);
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 100%);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.progress-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-align: right;
+    font-weight: 600;
+}
+
+.challenge-status {
+    margin-top: var(--space-sm);
+    background: var(--success);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    text-align: center;
+    font-weight: 700;
+    animation: pulse 1s ease infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+/* Gamification Stats Panel */
+.gamification-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-md);
+    margin: var(--space-lg) 0;
+}
+
+.stat-card {
+    background: var(--bg-card);
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    transition: all var(--transition-base);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-sm);
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-saffron);
+    margin-bottom: var(--space-xs);
+}
+
+.stat-label {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    #badgeGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #challengesContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .points-display,
+    .streak-display {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .badge-unlock-content {
+        padding: 1.5rem;
+    }
+
+    .badge-unlock-icon {
+        font-size: 4rem;
+    }
+
+    .badge-unlock-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* Dark Mode Support */
+.dark-mode .badge-unlock-content {
+    background: linear-gradient(135deg, #FF6B35 0%, #FFC107 100%);
+}
+
+.dark-mode .badge-card.unlocked {
+    background: var(--bg-card);
+    border-color: var(--gold);
+}
+
+.dark-mode #soundToggle {
+    background: var(--bg-secondary);
+}
