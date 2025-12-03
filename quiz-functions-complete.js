@@ -277,30 +277,6 @@ function showResults(correct, total, scorePercent, timeTaken) {
     }
 }
 
-function retryQuiz() {
-    // Reset and retry same subject
-    const subject = quizState.selectedSubject;
-    const count = quizState.questionCount;
-
-    if (!subject || !subjectQuestions[subject]) {
-        goHome();
-        return;
-    }
-
-    document.getElementById('quizResults').classList.add('hidden');
-
-    quizState.questions = selectMixedDifficultyQuestions(subjectQuestions[subject], count);
-    quizState.answers = new Array(quizState.questions.length).fill(null);
-    quizState.currentQuestionIndex = 0;
-    quizState.score = { correct: 0, wrong: 0, skipped: 0 };
-
-    document.getElementById('quizInterface').classList.remove('hidden');
-
-    quizState.startTime = Date.now();
-    startTimer();
-    loadQuestion();
-}
-
 function goHome() {
     // Reset everything and go back to subject selection
     stopTimer();

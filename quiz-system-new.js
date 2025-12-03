@@ -413,39 +413,121 @@ function selectSubject(subject) {
     document.getElementById('selectedSubjectName').textContent = getSubjectName(subject);
 }
 
+// ===== Fetch Quiz from API =====
+async function fetchQuizFromAPI(subject, count) {
+    // IMPORTANT: Replace with your actual API key from QuizAPI.io
+    const apiKey = 'YOUR_API_KEY'; // <<< REPLACE THIS
+
+    // Map our subjects to QuizAPI categories
+    const categoryMap = {
+        physics: 'Linux', // Placeholder, map to a relevant category
+        chemistry: 'DevOps', // Placeholder, map to a relevant category
+        biology: 'Code', // Placeholder, you can choose from: Linux, DevOps, Code, CMS, SQL
+        general: 'Docker' // Placeholder
+    };
+
+    const category = categoryMap[subject] || 'Linux'; // Default to a category
+
+    const url = `https://quizapi.io/api/v1/questions?apiKey=${apiKey}&category=${category}&limit=${count}`;
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            // If the response is not OK, try to parse the error message from the API
+            const errorData = await response.json();
+            throw new Error(errorData.error || `API request failed with status ${response.status}`);
+        }
+        const data = await response.json();
+
+        // Transform API data to our internal format
+        return data.map(apiQuestion => {
+            const options = Object.values(apiQuestion.answers).filter(answer => answer !== null);
+            const correctAnswers = Object.entries(apiQuestion.correct_answers)
+                .filter(([key, value]) => value === 'true')
+                .map(([key]) => key.replace('_correct', ''));
+
+            // Find the index of the correct answer
+            // The API provides answers like 'answer_a', 'answer_b', etc.
+            const correctOptionKey = correctAnswers[0]; // Assuming one correct answer
+            const correctOptionValue = apiQuestion.answers[correctOptionKey.replace('answer', 'answer_a')];
+            let correctIndex = options.findIndex(option => option === correctOptionValue);
+
+            // The API sometimes has inconsistencies, if not found, default to 0
+            if (correctIndex === -1) {
+                correctIndex = 0;
+            }
+
+
+            return {
+                question: apiQuestion.question,
+                options: options,
+                correct: correctIndex,
+                difficulty: apiQuestion.difficulty.toLowerCase(),
+                // API doesn't provide explanation, so we add a default one
+                explanation: apiQuestion.explanation || "This question was sourced from the QuizAPI. No detailed explanation is available at this time."
+            };
+        });
+
+    } catch (error) {
+        console.error("Error fetching quiz data:", error);
+        // Return an empty array or handle the error as needed
+        return [];
+    }
+}
+
+
 // ===== Start Quiz with Mixed Difficulty =====
-function startSubjectQuiz() {
+async function startSubjectQuiz() {
     const count = quizState.questionCount;
     const subject = quizState.selectedSubject;
-    const allQuestions = subjectQuestions[subject] || [];
 
-    if (allQuestions.length === 0) {
-        alert('इस विषय के लिए प्रश्न जल्द ही आ रहे हैं!');
-        return;
+    try {
+        // Fetch questions from the API
+        const fetchedQuestions = await fetchQuizFromAPI(subject, count);
+
+        if (fetchedQuestions.length === 0) {
+            alert('Could not fetch questions from the API. Please check your API key or network connection. Falling back to local questions.');
+            // Fallback to local questions if API fails
+            const allQuestions = subjectQuestions[subject] || [];
+            if (allQuestions.length === 0) {
+                alert('इस विषय के लिए प्रश्न जल्द ही आ रहे हैं!');
+                return;
+            }
+            quizState.questions = selectMixedDifficultyQuestions(allQuestions, count);
+        } else {
+            quizState.questions = fetchedQuestions;
+        }
+
+        quizState.answers = new Array(quizState.questions.length).fill(null);
+        quizState.currentQuestionIndex = 0;
+
+        // Reset score
+        quizState.score = {
+            correct: 0,
+            wrong: 0,
+            skipped: 0
+        };
+
+        // Hide question count, show quiz interface
+        document.getElementById('questionCountSelection').classList.add('hidden');
+        document.getElementById('quizInterface').classList.remove('hidden');
+
+        // Update UI
+        document.getElementById('selectedSubject').textContent = getSubjectName(subject);
+        document.getElementById('totalQuestions').textContent = quizState.questions.length;
+
+        // Start timer
+        quizState.startTime = Date.now();
+        startTimer();
+
+        // Load first question
+        loadQuestion();
+    } catch (error) {
+        alert("An error occurred while starting the quiz. Please try again.");
+        console.error("Quiz start error:", error);
+        // Optionally, reset to the main screen
+        resetQuiz();
     }
-
-    // Select questions with mixed difficulty
-    quizState.questions = selectMixedDifficultyQuestions(allQuestions, count);
-    quizState.answers = new Array(quizState.questions.length).fill(null);
-    quizState.currentQuestionIndex = 0;
-
-    // Reset score
-    quizState.score = { correct: 0, wrong: 0, skipped: 0 };
-
-    // Hide question count, show quiz interface
-    document.getElementById('questionCountSelection').classList.add('hidden');
-    document.getElementById('quizInterface').classList.remove('hidden');
-
-    // Update UI
-    document.getElementById('selectedSubject').textContent = getSubjectName(subject);
-    document.getElementById('totalQuestions').textContent = quizState.questions.length;
-
-    // Start timer
-    quizState.startTime = Date.now();
-    startTimer();
-
-    // Load first question
-    loadQuestion();
 }
 
 // ===== Select Mixed Difficulty Questions =====
@@ -570,22 +652,18 @@ function goToHome() {
     }
 }
 
-function retryQuiz() {
-    // Restart the same quiz with same subject and question count
-    quizState.currentQuestionIndex = 0;
-    quizState.answers = new Array(quizState.questions.length).fill(null);
-    quizState.score = { correct: 0, wrong: 0, skipped: 0 };
-
+async function retryQuiz() {
     // Hide results, show quiz interface
     document.getElementById('quizResults').classList.add('hidden');
-    document.getElementById('quizInterface').classList.remove('hidden');
+    
+    // Reset quiz state for a fresh start, but keep subject and count
+    quizState.currentQuestionIndex = 0;
+    quizState.questions = [];
+    quizState.answers = [];
+    quizState.score = { correct: 0, wrong: 0, skipped: 0 };
 
-    // Reload first question
-    loadQuestion();
-
-    // Restart timer
-    quizState.startTime = Date.now();
-    startTimer();
+    // Re-start the quiz, which will fetch new questions
+    await startSubjectQuiz();
 }
 
 console.log('✅ Subject-Wise Quiz System Loaded! Mixed Difficulty: Easy → Medium → Hard');
