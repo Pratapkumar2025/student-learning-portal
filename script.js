@@ -440,3 +440,189 @@ window.HamarPadhaiNav = {
 };
 
 console.log('📦 HamarPadhaiNav functions available globally');
+
+// ========================================
+// CRITICAL MISSING FUNCTIONS - Bug Fix Dec 2025
+// ========================================
+
+// 1. Dark Mode Toggle
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    localStorage.setItem('darkMode', isDark);
+    const icon = document.getElementById('darkModeIcon');
+    if (icon) {
+        icon.textContent = isDark ? '☀️' : '🌙';
+    }
+}
+
+// Initialize dark mode on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+    if (savedDarkMode) {
+        document.body.classList.add('dark-mode');
+        const icon = document.getElementById('darkModeIcon');
+        if (icon) icon.textContent = '☀️';
+    }
+});
+
+// 2. Refresh Quote
+const motivationalQuotes = [
+    { hindi: "पढ़ाई से बदलऽ अपन किस्मत!", english: "Change your destiny with education!", author: "हमार पढ़ाई" },
+    { hindi: "जे पढ़तई, उहे गढ़तई!", english: "He who studies, builds!", author: "बिहार की कहावत" },
+    { hindi: "ज्ञान ही शक्ति है!", english: "Knowledge is power!", author: "फ्रांसिस बेकन" },
+    { hindi: "सफलता का कोई शॉर्टकट नहीं होता!", english: "There is no shortcut to success!", author: "APJ Abdul Kalam" },
+    { hindi: "कठिन परिश्रम कभी बेकार नहीं जाता!", english: "Hard work never goes to waste!", author: "महात्मा गांधी" }
+];
+
+function refreshQuote() {
+    const randomQuote = motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
+
+    const quoteText = document.getElementById('quoteText');
+    const quoteTextEnglish = document.getElementById('quoteTextEnglish');
+    const quoteAuthor = document.getElementById('quoteAuthor');
+
+    if (quoteText) quoteText.textContent = randomQuote.hindi;
+    if (quoteTextEnglish) quoteTextEnglish.textContent = randomQuote.english;
+    if (quoteAuthor) quoteAuthor.textContent = '— ' + randomQuote.author;
+}
+
+// Load initial quote on page load
+document.addEventListener('DOMContentLoaded', refreshQuote);
+
+// 3. Open Study Material
+function openStudyMaterial(classRange) {
+    alert(`📚 कक्षा ${classRange} की अध्ययन सामग्री जल्द ही उपलब्ध होगी!\n\nहम आपके लिए बेहतरीन कंटेंट तैयार कर रहे हैं। 🙏`);
+    console.log(`Study material requested for class: ${classRange}`);
+}
+
+// 4. Switch Leaderboard Tab
+function switchLeaderboardTab(tab) {
+    // Remove active class from all tabs
+    const allTabs = document.querySelectorAll('.tab-button');
+    allTabs.forEach(btn => btn.classList.remove('active'));
+
+    // Add active class to clicked tab
+    if (event && event.target) {
+        event.target.classList.add('active');
+    }
+
+    console.log(`Loading leaderboard for: ${tab}`);
+
+    // TODO: Implement actual leaderboard data loading
+    alert(`🏆 ${tab === 'today' ? 'आज' : tab === 'week' ? 'इस हफ्ते' : 'सभी समय'} की लीडरबोर्ड लोड हो रही है...`);
+}
+
+// 5. Submit User Comment
+function submitUserComment() {
+    const nameInput = document.getElementById('commentName');
+    const commentInput = document.getElementById('commentText');
+
+    if (!nameInput || !commentInput) {
+        console.error('Comment form fields not found');
+        return;
+    }
+
+    const name = nameInput.value.trim();
+    const comment = commentInput.value.trim();
+
+    if (!name || !comment) {
+        alert('⚠️ कृपया नाम और कमेंट दोनों भरें!');
+        return;
+    }
+
+    // Save to localStorage
+    const comments = JSON.parse(localStorage.getItem('userComments') || '[]');
+    const newComment = {
+        name,
+        comment,
+        date: new Date().toLocaleDateString('hi-IN'),
+        time: new Date().toLocaleTimeString('hi-IN', { hour: '2-digit', minute: '2-digit' })
+    };
+
+    comments.unshift(newComment); // Add to beginning
+    localStorage.setItem('userComments', JSON.stringify(comments));
+
+    alert('✅ आपका कमेंट सबमिट हो गया! धन्यवाद! 🙏\n\nआपकी प्रतिक्रिया हमारे लिए बहुत महत्वपूर्ण है।');
+
+    // Clear form
+    nameInput.value = '';
+    commentInput.value = '';
+
+    // Reload comments display (if function exists)
+    if (typeof displayUserComments === 'function') {
+        displayUserComments();
+    }
+}
+
+// 6. Download Certificate
+function downloadCertificate() {
+    alert('🎓 सर्टिफिकेट डाउनलोड फीचर जल्द ही आ रहा है!\n\nहम आपके लिए बेहतरीन सर्टिफिकेट डिज़ाइन कर रहे हैं। 📜✨');
+    console.log('Certificate download requested');
+
+    // TODO: Implement actual certificate generation with jsPDF
+}
+
+console.log('✅ Critical missing functions loaded successfully!');
+// ========================================
+// CONSOLIDATED SECTIONS FUNCTIONS
+// ========================================
+
+// Stats Tab Switching (Leaderboard vs Progress)
+function showStatsTab(tab) {
+    document.querySelectorAll('.stats-tab-content').forEach(content => {
+        content.classList.add('hidden');
+    });
+
+    document.querySelectorAll('.stats-tab-button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    if (tab === 'leaderboard') {
+        document.getElementById('leaderboard-tab').classList.remove('hidden');
+    } else {
+        document.getElementById('progress-tab').classList.remove('hidden');
+    }
+
+    event.target.classList.add('active');
+}
+
+// Stories/Puzzles Tab Switching
+function showStoriesTab(tab) {
+    document.querySelectorAll('.stories-tab-content').forEach(content => {
+        content.classList.add('hidden');
+    });
+
+    document.querySelectorAll('.stories-tab-button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    if (tab === 'stories') {
+        document.getElementById('stories-content').classList.remove('hidden');
+    } else {
+        document.getElementById('puzzles-content').classList.remove('hidden');
+    }
+
+    event.target.classList.add('active');
+}
+
+// Open Story
+function openStory(storyId) {
+    alert(`📖 कहानी: ${storyId}\n\nपूरी कहानी जल्द ही उपलब्ध होगी! 🙏`);
+}
+
+// Toggle Puzzle Answer
+function toggleAnswer(puzzleId) {
+    const answer = document.getElementById(puzzleId);
+    const button = event.target;
+
+    if (answer.classList.contains('hidden')) {
+        answer.classList.remove('hidden');
+        button.textContent = 'जवाब छुपाएं';
+    } else {
+        answer.classList.add('hidden');
+        button.textContent = 'जवाब देखें';
+    }
+}
+
+console.log('✅ Consolidated sections loaded!');

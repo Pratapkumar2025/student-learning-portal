@@ -1,0 +1,110 @@
+    <!-- MERGED: Stats Section (Leaderboard + Progress Combined) -->
+    <section id="stats" class="stats-section">
+        <div class="container">
+            <h2 class="section-title">आपके आंकड़े 📊</h2>
+            <p class="section-subtitle">रैंकिंग और प्रगति एक जगह!</p>
+            <p class="section-tagline">करत-करत अभ्यास के, जड़मति होत सुजान! 💪</p>
+
+            <!-- Tabs: Leaderboard vs My Progress -->
+            <div class="stats-tabs">
+                <button class="stats-tab-button active" onclick="showStatsTab('leaderboard')">🏆 रैंकिंग</button>
+                <button class="stats-tab-button" onclick="showStatsTab('progress')">📊 मेरी प्रगति</button>
+            </div>
+
+            <!-- Leaderboard Tab Content -->
+            <div class="stats-tab-content" id="leaderboard-tab">
+                <div class="leaderboard-tabs">
+                    <button class="tab-button active" onclick="switchLeaderboardTab('today')">आज</button>
+                    <button class="tab-button" onclick="switchLeaderboardTab('week')">इस हफ्ते</button>
+                    <button class="tab-button" onclick="switchLeaderboardTab('alltime')">सभी समय</button>
+                </div>
+
+                <div class="leaderboard-list" id="leaderboardList">
+                    <div class="leaderboard-placeholder">
+                        <p>🏆 जल्द ही लीडरबोर्ड उपलब्ध होगा!</p>
+                        <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem;">
+                            क्विज खेलें और टॉप पर आएं! 💪
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Tab Content -->
+            <div class="stats-tab-content hidden" id="progress-tab">
+                <div class="progress-grid">
+                    <div class="progress-card">
+                        <h3 class="progress-card-title">आज का स्ट्रीक 🔥</h3>
+                        <div class="streak-display">
+                            <span class="streak-number" id="streakCount">0</span>
+                            <span class="streak-label">दिन</span>
+                        </div>
+                    </div>
+
+                    <div class="progress-card">
+                        <h3 class="progress-card-title">कुल क्विज़ 📝</h3>
+                        <div class="quiz-count-display">
+                            <span class="quiz-count" id="totalQuizzesTaken">0</span>
+                        </div>
+                    </div>
+
+                    <div class="progress-card">
+                        <h3 class="progress-card-title">औसत स्कोर 📈</h3>
+                        <div class="avg-score-display">
+                            <span class="avg-score" id="averageScore">0</span>
+                            <span class="avg-label">%</span>
+                        </div>
+                    </div>
+
+                    <div class="progress-card">
+                        <h3 class="progress-card-title">कुल समय ⏰</h3>
+                        <div class="time-display">
+                            <span class="time-spent" id="totalTimeSpent">0</span>
+                            <span class="time-label">मिनट</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subject-progress">
+                    <h3 class="progress-subtitle">विषयवार प्रगति</h3>
+                    <div class="subject-progress-bars">
+                        <div class="subject-progress-item">
+                            <div class="subject-progress-header">
+                                <span>भौतिक विज्ञान ⚛️</span>
+                                <span id="physicsProgress">0%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill physics" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="subject-progress-item">
+                            <div class="subject-progress-header">
+                                <span>रसायन विज्ञान 🧪</span>
+                                <span id="chemistryProgress">0%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill chemistry" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="subject-progress-item">
+                            <div class="subject-progress-header">
+                                <span>जीव विज्ञान 🌱</span>
+                                <span id="biologyProgress">0%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill biology" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="subject-progress-item">
+                            <div class="subject-progress-header">
+                                <span>सामान्य विज्ञान 🔬</span>
+                                <span id="generalProgress">0%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill general" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

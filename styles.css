@@ -558,3 +558,260 @@ body.quiz-mode-active .quiz-exit-btn {
         margin-top: 0 !important;
     }
 }
+/* ========================================
+   CONSOLIDATED SECTIONS STYLES
+   ======================================== */
+
+/* Stats Section */
+.stats-section {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.stats-tabs {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.stats-tab-button {
+    padding: 0.75rem 2rem;
+    background: white;
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #667eea;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.stats-tab-button.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.stats-tab-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.stats-tab-content {
+    margin-top: 2rem;
+}
+
+.leaderboard-placeholder {
+    text-align: center;
+    padding: 3rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Stories Section */
+.stories-section {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+}
+
+.stories-tabs {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.stories-tab-button {
+    padding: 0.75rem 2rem;
+    background: white;
+    border: 2px solid #FF6B35;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #FF6B35;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.stories-tab-button.active {
+    background: linear-gradient(135deg, #FF6B35 0%, #F7931A 100%);
+    color: white;
+}
+
+.stories-tab-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+}
+
+.stories-grid, .puzzles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.story-card, .puzzle-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.story-card:hover, .puzzle-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.story-card h3, .puzzle-question {
+    color: #FF6B35;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.story-excerpt, .puzzle-text {
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.story-button, .puzzle-button {
+    padding: 0.5rem 1rem;
+    background: #FF6B35;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.story-button:hover, .puzzle-button:hover {
+    background: #F7931A;
+    transform: scale(1.05);
+}
+
+.puzzle-answer {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #d4edda;
+    border-left: 4px solid #28a745;
+    border-radius: 4px;
+    color: #155724;
+    font-weight: 600;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Feedback Section */
+.feedback-section {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.add-comment-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+.add-comment-box h3 {
+    color: #667eea;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.comment-submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.comment-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.comments-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.comments-list h3 {
+    color: #667eea;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.comments-placeholder {
+    background: white;
+    padding: 3rem;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Mobile Responsiveness for Consolidated Sections */
+@media (max-width: 768px) {
+    .stories-grid, .puzzles-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .stats-tabs, .stories-tabs {
+        flex-direction: column;
+    }
+
+    .stats-tab-button, .stories-tab-button {
+        width: 100%;
+    }
+
+    .story-card, .puzzle-card {
+        padding: 1rem;
+    }
+
+    .add-comment-box {
+        padding: 1.5rem;
+    }
+}

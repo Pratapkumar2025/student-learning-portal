@@ -1,0 +1,534 @@
+<!-- ============================================
+     CONSOLIDATED SECTIONS TO ADD TO index.html
+     Place these AFTER the Gallery section (around line 922)
+     ============================================ -->
+
+<!-- MERGED: Stats Section (Leaderboard + Progress Combined) -->
+<section id="stats" class="stats-section">
+    <div class="container">
+        <h2 class="section-title">आपके आंकड़े 📊</h2>
+        <p class="section-subtitle">रैंकिंग और प्रगति एक जगह!</p>
+        <p class="section-tagline">करत-करत अभ्यास के, जड़मति होत सुजान! 💪</p>
+
+        <!-- Tabs: Leaderboard vs My Progress -->
+        <div class="stats-tabs">
+            <button class="stats-tab-button active" onclick="showStatsTab('leaderboard')">🏆 रैंकिंग</button>
+            <button class="stats-tab-button" onclick="showStatsTab('progress')">📊 मेरी प्रगति</button>
+        </div>
+
+        <!-- Leaderboard Tab Content -->
+        <div class="stats-tab-content" id="leaderboard-tab">
+            <div class="leaderboard-tabs">
+                <button class="tab-button active" onclick="switchLeaderboardTab('today')">आज</button>
+                <button class="tab-button" onclick="switchLeaderboardTab('week')">इस हफ्ते</button>
+                <button class="tab-button" onclick="switchLeaderboardTab('alltime')">सभी समय</button>
+            </div>
+
+            <div class="leaderboard-list" id="leaderboardList">
+                <div class="leaderboard-placeholder">
+                    <p>🏆 जल्द ही लीडरबोर्ड उपलब्ध होगा!</p>
+                    <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem;">
+                        क्विज खेलें और टॉप पर आएं! 💪
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Tab Content -->
+        <div class="stats-tab-content hidden" id="progress-tab">
+            <div class="progress-grid">
+                <div class="progress-card">
+                    <h3 class="progress-card-title">आज का स्ट्रीक 🔥</h3>
+                    <div class="streak-display">
+                        <span class="streak-number" id="streakCount">0</span>
+                        <span class="streak-label">दिन</span>
+                    </div>
+                </div>
+
+                <div class="progress-card">
+                    <h3 class="progress-card-title">कुल क्विज़ 📝</h3>
+                    <div class="quiz-count-display">
+                        <span class="quiz-count" id="totalQuizzesTaken">0</span>
+                    </div>
+                </div>
+
+                <div class="progress-card">
+                    <h3 class="progress-card-title">औसत स्कोर 📈</h3>
+                    <div class="avg-score-display">
+                        <span class="avg-score" id="averageScore">0</span>
+                        <span class="avg-label">%</span>
+                    </div>
+                </div>
+
+                <div class="progress-card">
+                    <h3 class="progress-card-title">कुल समय ⏰</h3>
+                    <div class="time-display">
+                        <span class="time-spent" id="totalTimeSpent">0</span>
+                        <span class="time-label">मिनट</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subject-progress">
+                <h3 class="progress-subtitle">विषयवार प्रगति</h3>
+                <div class="subject-progress-bars">
+                    <div class="subject-progress-item">
+                        <div class="subject-progress-header">
+                            <span>भौतिक विज्ञान ⚛️</span>
+                            <span id="physicsProgress">0%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill physics" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="subject-progress-item">
+                        <div class="subject-progress-header">
+                            <span>रसायन विज्ञान 🧪</span>
+                            <span id="chemistryProgress">0%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill chemistry" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="subject-progress-item">
+                        <div class="subject-progress-header">
+                            <span>जीव विज्ञान 🌱</span>
+                            <span id="biologyProgress">0%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill biology" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="subject-progress-item">
+                        <div class="subject-progress-header">
+                            <span>सामान्य विज्ञान 🔬</span>
+                            <span id="generalProgress">0%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill general" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- NEW: Stories & Puzzles Section (Combined) -->
+<section id="stories" class="stories-section">
+    <div class="container">
+        <h2 class="section-title">कहानियाँ और पहेलियाँ 📖</h2>
+        <p class="section-subtitle">हिंदी की मज़ेदार कहानियाँ और पहेलियाँ</p>
+        <p class="section-tagline">तनी रुकिये न जी, कहानी सुनीं! 🙏</p>
+
+        <!-- Tabs: Stories vs Puzzles -->
+        <div class="stories-tabs">
+            <button class="stories-tab-button active" onclick="showStoriesTab('stories')">📖 कहानियाँ</button>
+            <button class="stories-tab-button" onclick="showStoriesTab('puzzles')">🤔 पहेलियाँ</button>
+        </div>
+
+        <!-- Stories Tab Content -->
+        <div class="stories-tab-content" id="stories-content">
+            <div class="stories-grid">
+                <div class="story-card">
+                    <h3>चालाक लोमड़ी और कौआ 🦊</h3>
+                    <p class="story-excerpt">एक कौए के मुंह में रोटी का टुकड़ा था। एक चालाक लोमड़ी ने उसे देखा और...</p>
+                    <button class="story-button" onclick="openStory('fox-crow')">पूरी कहानी पढ़ें</button>
+                </div>
+
+                <div class="story-card">
+                    <h3>बंदर और मगरमच्छ 🐵</h3>
+                    <p class="story-excerpt">एक बंदर और मगरमच्छ में गहरी दोस्ती थी। लेकिन एक दिन...</p>
+                    <button class="story-button" onclick="openStory('monkey-crocodile')">पूरी कहानी पढ़ें</button>
+                </div>
+
+                <div class="story-card">
+                    <h3>प्यासा कौआ 🦅</h3>
+                    <p class="story-excerpt">गर्मी के दिनों में एक कौआ बहुत प्यासा था। उसने एक घड़े में पानी देखा...</p>
+                    <button class="story-button" onclick="openStory('thirsty-crow')">पूरी कहानी पढ़ें</button>
+                </div>
+
+                <div class="story-card">
+                    <h3>शेर और चूहा 🦁</h3>
+                    <p class="story-excerpt">एक बार एक छोटा चूहा शेर के ऊपर दौड़ गया। शेर गुस्से में उठा और...</p>
+                    <button class="story-button" onclick="openStory('lion-mouse')">पूरी कहानी पढ़ें</button>
+                </div>
+
+                <div class="story-card">
+                    <h3>खरगोश और कछुआ 🐇</h3>
+                    <p class="story-excerpt">एक घमंडी खरगोश ने धीमे कछुए को दौड़ के लिए चुनौती दी...</p>
+                    <button class="story-button" onclick="openStory('rabbit-turtle')">पूरी कहानी पढ़ें</button>
+                </div>
+
+                <div class="story-card">
+                    <h3>सोने का अंडा 🥚</h3>
+                    <p class="story-excerpt">एक किसान के पास एक मुर्गी थी जो रोज सोने का अंडा देती थी...</p>
+                    <button class="story-button" onclick="openStory('golden-egg')">पूरी कहानी पढ़ें</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Puzzles Tab Content -->
+        <div class="stories-tab-content hidden" id="puzzles-content">
+            <div class="puzzles-grid">
+                <div class="puzzle-card">
+                    <h3 class="puzzle-question">🤔 बताओ क्या हूँ मैं?</h3>
+                    <p class="puzzle-text">"बिना पैर के चलता हूँ, बिना मुंह के बोलता हूँ, तुम मुझे देख नहीं सकते पर सुन सकते हो।"</p>
+                    <button class="puzzle-button" onclick="toggleAnswer('puzzle1')">जवाब देखें</button>
+                    <p class="puzzle-answer hidden" id="puzzle1">✅ जवाब: हवा (Wind)</p>
+                </div>
+
+                <div class="puzzle-card">
+                    <h3 class="puzzle-question">🤔 यह क्या है?</h3>
+                    <p class="puzzle-text">"वो चीज जो जब टूटे तो उसे ठीक नहीं किया जा सकता, लेकिन वो कभी दिखती नहीं।"</p>
+                    <button class="puzzle-button" onclick="toggleAnswer('puzzle2')">जवाब देखें</button>
+                    <p class="puzzle-answer hidden" id="puzzle2">✅ जवाब: वादा (Promise)</p>
+                </div>
+
+                <div class="puzzle-card">
+                    <h3 class="puzzle-question">🤔 पहेली बूझो!</h3>
+                    <p class="puzzle-text">"मेरे पास सिर है पर बाल नहीं, आंखें हैं पर देख नहीं सकता।"</p>
+                    <button class="puzzle-button" onclick="toggleAnswer('puzzle3')">जवाब देखें</button>
+                    <p class="puzzle-answer hidden" id="puzzle3">✅ जवाब: सुई (Needle)</p>
+                </div>
+
+                <div class="puzzle-card">
+                    <h3 class="puzzle-question">🤔 सोचो और बताओ!</h3>
+                    <p class="puzzle-text">"हज़ार दांत हैं पर काटता नहीं। बताओ मैं कौन हूँ?"</p>
+                    <button class="puzzle-button" onclick="toggleAnswer('puzzle4')">जवाब देखें</button>
+                    <p class="puzzle-answer hidden" id="puzzle4">✅ जवाब: कंघी (Comb)</p>
+                </div>
+
+                <div class="puzzle-card">
+                    <h3 class="puzzle-question">🤔 दिमाग लगाओ!</h3>
+                    <p class="puzzle-text">"वो चीज जो दिन में एक बार, रात में दो बार, लेकिन हफ्ते में एक बार भी नहीं आती।"</p>
+                    <button class="puzzle-button" onclick="toggleAnswer('puzzle5')">जवाब देखें</button>
+                    <p class="puzzle-answer hidden" id="puzzle5">✅ जवाब: अक्षर 'त' (Letter 'T')</p>
+                </div>
+
+                <div class="puzzle-card">
+                    <h3 class="puzzle-question">🤔 बुझाइल की ना?</h3>
+                    <p class="puzzle-text">"जितना काटो उतना बढ़े। बताओ ये क्या है?"</p>
+                    <button class="puzzle-button" onclick="toggleAnswer('puzzle6')">जवाब देखें</button>
+                    <p class="puzzle-answer hidden" id="puzzle6">✅ जवाब: खेत में खाई (Ditch/Trench)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- NEW: Feedback Section -->
+<section id="feedback" class="feedback-section">
+    <div class="container">
+        <h2 class="section-title">कैसन लगल? 💬</h2>
+        <p class="section-subtitle">आपके विचार हमारे लिए महत्वपूर्ण हैं</p>
+        <p class="section-tagline">बकैती कम, फीडबैक ज्यादा! 😊</p>
+
+        <!-- Add Comment Form -->
+        <div class="add-comment-box">
+            <h3>📝 अपनी राय दें</h3>
+            <form id="commentForm" onsubmit="event.preventDefault(); submitUserComment();">
+                <div class="form-group">
+                    <label for="commentName">आपका नाम:</label>
+                    <input type="text" id="commentName" placeholder="अपना नाम लिखें" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="commentText">आपकी राय:</label>
+                    <textarea id="commentText" rows="4" placeholder="वेबसाइट कैसी लगी? सुझाव दें..." required></textarea>
+                </div>
+
+                <button type="submit" class="comment-submit-btn">दाब दीं बटन! 🚀</button>
+            </form>
+        </div>
+
+        <!-- Comments List -->
+        <div class="comments-list" id="commentsList">
+            <h3>💬 सभी कमेंट्स</h3>
+            <div class="comments-placeholder">
+                <p>अभी तक कोई कमेंट नहीं है।</p>
+                <p style="font-size: 0.9rem; opacity: 0.8;">सबसे पहले कमेंट करें! ✨</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     JAVASCRIPT FUNCTIONS TO ADD TO script.js
+     ============================================ -->
+<script>
+// Stats Tab Switching
+function showStatsTab(tab) {
+    // Hide all stats tabs
+    document.querySelectorAll('.stats-tab-content').forEach(content => {
+        content.classList.add('hidden');
+    });
+
+    // Remove active class from all tab buttons
+    document.querySelectorAll('.stats-tab-button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    // Show selected tab
+    if (tab === 'leaderboard') {
+        document.getElementById('leaderboard-tab').classList.remove('hidden');
+    } else {
+        document.getElementById('progress-tab').classList.remove('hidden');
+    }
+
+    // Mark clicked button as active
+    event.target.classList.add('active');
+}
+
+// Stories/Puzzles Tab Switching
+function showStoriesTab(tab) {
+    // Hide all content
+    document.querySelectorAll('.stories-tab-content').forEach(content => {
+        content.classList.add('hidden');
+    });
+
+    // Remove active from all buttons
+    document.querySelectorAll('.stories-tab-button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    // Show selected content
+    if (tab === 'stories') {
+        document.getElementById('stories-content').classList.remove('hidden');
+    } else {
+        document.getElementById('puzzles-content').classList.remove('hidden');
+    }
+
+    // Mark clicked button as active
+    event.target.classList.add('active');
+}
+
+// Open Story (Placeholder - can be enhanced with modal)
+function openStory(storyId) {
+    alert(`📖 कहानी: ${storyId}\n\nपूरी कहानी जल्द ही उपलब्ध होगी!\n\nअभी हम इसे तैयार कर रहे हैं। 🙏`);
+    console.log('Story requested:', storyId);
+}
+
+// Toggle Puzzle Answer
+function toggleAnswer(puzzleId) {
+    const answer = document.getElementById(puzzleId);
+    const button = event.target;
+
+    if (answer.classList.contains('hidden')) {
+        answer.classList.remove('hidden');
+        button.textContent = 'जवाब छुपाएं';
+    } else {
+        answer.classList.add('hidden');
+        button.textContent = 'जवाब देखें';
+    }
+}
+
+console.log('✅ Consolidated sections JavaScript loaded!');
+</script>
+
+<!-- ============================================
+     CSS STYLES TO ADD TO styles.css
+     ============================================ -->
+<style>
+/* Stats Section */
+.stats-section {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.stats-tabs {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.stats-tab-button {
+    padding: 0.75rem 2rem;
+    background: white;
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #667eea;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.stats-tab-button.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.stats-tab-content {
+    margin-top: 2rem;
+}
+
+.leaderboard-placeholder {
+    text-align: center;
+    padding: 3rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Stories Section */
+.stories-section {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+}
+
+.stories-tabs {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.stories-tab-button {
+    padding: 0.75rem 2rem;
+    background: white;
+    border: 2px solid #FF6B35;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #FF6B35;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.stories-tab-button.active {
+    background: linear-gradient(135deg, #FF6B35 0%, #F7931A 100%);
+    color: white;
+}
+
+.stories-grid, .puzzles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.story-card, .puzzle-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.story-card:hover, .puzzle-card:hover {
+    transform: translateY(-5px);
+}
+
+.story-card h3, .puzzle-question {
+    color: #FF6B35;
+    margin-bottom: 1rem;
+}
+
+.story-excerpt, .puzzle-text {
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.story-button, .puzzle-button {
+    padding: 0.5rem 1rem;
+    background: #FF6B35;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.puzzle-answer {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #d4edda;
+    border-left: 4px solid #28a745;
+    border-radius: 4px;
+    color: #155724;
+    font-weight: 600;
+}
+
+/* Feedback Section */
+.feedback-section {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.add-comment-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.comment-submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.comments-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.comments-placeholder {
+    background: white;
+    padding: 3rem;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Utility */
+.hidden {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    .stories-grid, .puzzles-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .stats-tabs, .stories-tabs {
+        flex-direction: column;
+    }
+
+    .stats-tab-button, .stories-tab-button {
+        width: 100%;
+    }
+}
+</style>

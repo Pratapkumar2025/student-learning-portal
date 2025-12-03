@@ -303,4 +303,34 @@ function goHome() {
     };
 }
 
+// ========================================
+// SKIP QUESTION FUNCTION - Bug Fix Dec 2025
+// ========================================
+
+// Skip Question Function
+function skipQuestion() {
+    console.log('Skipping question:', quizState.currentQuestionIndex);
+
+    // Mark current answer as skipped (null)
+    if (typeof quizState !== 'undefined' && quizState.answers) {
+        quizState.answers[quizState.currentQuestionIndex] = null;
+    }
+
+    // Move to next question
+    if (quizState.currentQuestionIndex < quizState.questions.length - 1) {
+        quizState.currentQuestionIndex++;
+        loadQuestion();
+    } else {
+        // Last question - show submit button
+        const nextBtn = document.getElementById('nextBtn');
+        const submitBtn = document.getElementById('submitBtn');
+
+        if (nextBtn) nextBtn.classList.add('hidden');
+        if (submitBtn) {
+            submitBtn.classList.remove('hidden');
+            submitBtn.disabled = false;
+        }
+    }
+}
+
 console.log('✅ Complete Quiz Functions Loaded! Ready to play!');
