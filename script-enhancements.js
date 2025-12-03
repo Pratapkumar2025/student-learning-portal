@@ -84,14 +84,14 @@ function showGalleryCategory(category) {
         activeTab.classList.add('active');
     }
 
-    // Hide all gallery content
-    const contents = document.querySelectorAll('.gallery-content');
-    contents.forEach(content => content.classList.remove('active'));
+    // Hide all gallery grids
+    const allGalleries = document.querySelectorAll('.gallery-grid');
+    allGalleries.forEach(gallery => gallery.classList.add('hidden'));
 
-    // Show selected category content
-    const selectedContent = document.getElementById(category + '-gallery');
+    // Show selected category content (ID format: gallery-{category})
+    const selectedContent = document.getElementById('gallery-' + category);
     if (selectedContent) {
-        selectedContent.classList.add('active');
+        selectedContent.classList.remove('hidden');
 
         // Trigger fade-in animation for cards
         const cards = selectedContent.querySelectorAll('.personality-card');
@@ -101,6 +101,8 @@ function showGalleryCategory(category) {
                 card.style.animation = 'fadeInUp 0.6s ease ' + (index * 0.1) + 's forwards';
             }, 10);
         });
+    } else {
+        console.error('Gallery not found:', 'gallery-' + category);
     }
 }
 

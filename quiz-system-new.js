@@ -482,21 +482,20 @@ async function startSubjectQuiz() {
     const subject = quizState.selectedSubject;
 
     try {
-        // Fetch questions from the API
-        const fetchedQuestions = await fetchQuizFromAPI(subject, count);
-
-        if (fetchedQuestions.length === 0) {
-            alert('Could not fetch questions from the API. Please check your API key or network connection. Falling back to local questions.');
-            // Fallback to local questions if API fails
-            const allQuestions = subjectQuestions[subject] || [];
-            if (allQuestions.length === 0) {
-                alert('इस विषय के लिए प्रश्न जल्द ही आ रहे हैं!');
-                return;
-            }
-            quizState.questions = selectMixedDifficultyQuestions(allQuestions, count);
-        } else {
-            quizState.questions = fetchedQuestions;
+        // Use local questions (API disabled)
+        // If you want to enable API, add your API key in fetchQuizFromAPI function
+        const allQuestions = subjectQuestions[subject] || [];
+        if (allQuestions.length === 0) {
+            alert('इस विषय के लिए प्रश्न जल्द ही आ रहे हैं!');
+            return;
         }
+        quizState.questions = selectMixedDifficultyQuestions(allQuestions, count);
+
+        // OPTIONAL: Enable API by uncommenting below
+        // const fetchedQuestions = await fetchQuizFromAPI(subject, count);
+        // if (fetchedQuestions.length > 0) {
+        //     quizState.questions = fetchedQuestions;
+        // }
 
         quizState.answers = new Array(quizState.questions.length).fill(null);
         quizState.currentQuestionIndex = 0;
