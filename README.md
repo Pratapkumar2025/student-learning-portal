@@ -13,7 +13,7 @@ A comprehensive educational website for students featuring daily news, quizzes, 
 
 ## 🌐 Live Website
 
-Visit: https://pratapkumar.netlify.app/
+Visit: (https://github.com/Pratapkumar2025)
 
 ## 👨‍💻 Developer
 
