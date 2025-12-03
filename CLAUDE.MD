@@ -1875,6 +1875,34 @@ Your website is **FULLY FIXED** when:
 
 ---
 
+## 🔒 SECURITY NOTES (December 2025)
+
+### **CodeQL Warnings - False Positives**
+
+GitHub CodeQL has flagged 2 "High Severity" warnings for `Math.random()` usage in `gamification-system.js`:
+- Line 17: User ID generation
+- Line 26: Username generation
+
+**Status:** ✅ FALSE POSITIVES (Safe to ignore)
+
+**Why Safe:**
+- These generate **display identifiers**, not security tokens
+- No authentication or authorization involved
+- No sensitive data protection required
+- Only used for localStorage keys and display names
+- No server, no multi-user system, no network requests
+
+**Full Analysis:** See `SECURITY-ANALYSIS.md` for detailed explanation
+
+**Action Required:** NONE - Current implementation is secure and appropriate for this educational project
+
+**When to Use Secure Random:**
+- If you add authentication → Use `crypto.getRandomValues()`
+- If you add session management → Use `crypto.randomBytes()` (Node.js)
+- If you add CSRF protection → Use cryptographically secure tokens
+
+---
+
 **Last Updated:** December 3, 2025
 **Next Review:** After implementing immediate fixes
 **Maintainer:** Pratap Kumar (TUMSENAHOPAYEGABE@GMAIL.COM)
